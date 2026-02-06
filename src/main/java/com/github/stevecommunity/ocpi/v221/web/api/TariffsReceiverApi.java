@@ -1,0 +1,54 @@
+package com.github.stevecommunity.ocpi.v221.web.api;
+
+import com.github.stevecommunity.ocpi.v221.model.tariffs.Tariff;
+import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
+import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
+import com.github.stevecommunity.ocpi.v221.web.OcpiResponseVoid;
+import io.swagger.v3.oas.annotations.Parameter;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+
+@RequestMapping(value = "/ocpi/2.2.1/tariffs", produces = MediaType.APPLICATION_JSON_VALUE)
+public interface TariffsReceiverApi {
+
+    @GetMapping("/{country_code}/{party_id}/{tariff_id}")
+    default ResponseEntity<OcpiResponse<Tariff>> getTariff(
+        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
+        @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
+        @PathVariable("tariff_id") @Size(min = 1, max = 36) String tariffId
+    ) {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @PutMapping(value = "/{country_code}/{party_id}/{tariff_id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    default ResponseEntity<OcpiResponseVoid> putTariff(
+        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
+        @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
+        @PathVariable("tariff_id") @Size(min = 1, max = 36) String tariffId,
+        @Valid @RequestBody Tariff tariff
+    ) {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @DeleteMapping("/{country_code}/{party_id}/{tariff_id}")
+    default ResponseEntity<OcpiResponseVoid> deleteTariff(
+        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
+        @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
+        @PathVariable("tariff_id") @Size(min = 1, max = 36) String tariffId
+    ) {
+        throw new RuntimeException("Not implemented");
+    }
+}
