@@ -2,9 +2,12 @@ package com.github.stevecommunity.ocpi.config;
 
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeadersAdvice;
 import com.github.stevecommunity.ocpi.v221.web.VersionNumberConverter;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.parameters.Parameter;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -15,6 +18,8 @@ import org.springframework.context.annotation.Bean;
 @AutoConfiguration
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class OcpiAutoConfiguration {
+
+    public static final String OCPI_AUTH_SCHEME = "ocpiAuth";
 
     @Bean
     @ConditionalOnMissingBean
@@ -30,9 +35,11 @@ public class OcpiAutoConfiguration {
 
     @Bean
     @ConditionalOnClass(OpenApiCustomizer.class)
-    @ConditionalOnMissingBean(name = "ocpiHeadersCustomizer")
-    public OpenApiCustomizer ocpiHeadersCustomizer() {
+    @ConditionalOnMissingBean(name = "ocpiCustomizer")
+    public OpenApiCustomizer ocpiCustomizer() {
         return openApi -> {
+            addOcpiAuthScheme(openApi);
+
             if (openApi.getPaths() == null) {
                 return;
             }
@@ -46,6 +53,20 @@ public class OcpiAutoConfiguration {
                 }
             }
         };
+    }
+
+    private static void addOcpiAuthScheme(OpenAPI openApi) {
+        if (openApi.getComponents() == null) {
+            openApi.setComponents(new Components());
+        }
+
+        var securityScheme = new SecurityScheme()
+            .type(SecurityScheme.Type.APIKEY)
+            .in(SecurityScheme.In.HEADER)
+            .name("Authorization")
+            .description("OCPI credentials token. Header value format: `Token <base64-credentials-token>`.");
+
+        openApi.getComponents().addSecuritySchemes(OCPI_AUTH_SCHEME, securityScheme);
     }
 
     private static void addOcpiHeaders(Operation operation) {
