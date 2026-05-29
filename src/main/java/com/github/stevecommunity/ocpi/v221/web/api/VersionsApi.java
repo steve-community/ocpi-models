@@ -22,6 +22,7 @@ import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_A
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
 @RequestMapping(value = "/ocpi/versions", produces = MediaType.APPLICATION_JSON_VALUE)
 public interface VersionsApi {
+
     @GetMapping
     default ResponseEntity<OcpiResponse<List<Version>>> getVersions(
         @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers

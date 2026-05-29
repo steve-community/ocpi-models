@@ -1,7 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.model.sessions;
 
-import lombok.Data;
 import com.github.stevecommunity.ocpi.v221.model.sessions.types.ProfileType;
+import lombok.Data;
 
 import jakarta.validation.constraints.NotNull;
 import java.time.Instant;

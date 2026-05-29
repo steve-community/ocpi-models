@@ -1,7 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.model.commands;
 
-import lombok.Data;
 import com.github.stevecommunity.ocpi.v221.model.tokens.Token;
+import lombok.Data;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
