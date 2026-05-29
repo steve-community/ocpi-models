@@ -1,6 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.web.api;
 
 import com.github.stevecommunity.ocpi.v221.model.tokens.Token;
+import com.github.stevecommunity.ocpi.v221.model.tokens.TokenPatch;
 import com.github.stevecommunity.ocpi.v221.model.tokens.types.TokenType;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
@@ -33,7 +34,7 @@ public interface TokensReceiverApi {
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
         @PathVariable("token_uid") @Size(min = 1, max = 36) String tokenUid,
-        @RequestParam(required = false) TokenType type
+        @RequestParam(required = false, defaultValue = "RFID") TokenType type
     ) {
         throw new RuntimeException("Not implemented");
     }
@@ -44,7 +45,7 @@ public interface TokensReceiverApi {
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
         @PathVariable("token_uid") @Size(min = 1, max = 36) String tokenUid,
-        @RequestParam(required = false) TokenType type,
+        @RequestParam(required = false, defaultValue = "RFID") TokenType type,
         @Valid @RequestBody Token token
     ) {
         throw new RuntimeException("Not implemented");
@@ -56,8 +57,8 @@ public interface TokensReceiverApi {
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
         @PathVariable("token_uid") @Size(min = 1, max = 36) String tokenUid,
-        @RequestParam(required = false) TokenType type,
-        @RequestBody Token token
+        @RequestParam(required = false, defaultValue = "RFID") TokenType type,
+        @Valid @RequestBody TokenPatch token
     ) {
         throw new RuntimeException("Not implemented");
     }

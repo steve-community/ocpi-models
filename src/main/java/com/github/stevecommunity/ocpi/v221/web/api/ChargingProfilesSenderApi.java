@@ -23,10 +23,10 @@ import jakarta.validation.constraints.Size;
 import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_AUTH_SCHEME;
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
-@RequestMapping(value = "/ocpi/2.2.1/chargingprofiles/response", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/ocpi/2.2.1/chargingprofiles", produces = MediaType.APPLICATION_JSON_VALUE)
 public interface ChargingProfilesSenderApi {
 
-    @PostMapping(value = "/active", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/response/active", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> postActiveChargingProfileResult(
         @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
         @Valid @RequestBody ActiveChargingProfileResult result
@@ -34,7 +34,7 @@ public interface ChargingProfilesSenderApi {
         throw new RuntimeException("Not implemented");
     }
 
-    @PostMapping(value = "/set", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/response/set", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> postChargingProfileResult(
         @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
         @Valid @RequestBody ChargingProfileResult result
@@ -42,7 +42,7 @@ public interface ChargingProfilesSenderApi {
         throw new RuntimeException("Not implemented");
     }
 
-    @PostMapping(value = "/clear", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/response/clear", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> postClearProfileResult(
         @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
         @Valid @RequestBody ClearProfileResult result
@@ -50,7 +50,7 @@ public interface ChargingProfilesSenderApi {
         throw new RuntimeException("Not implemented");
     }
 
-    @PutMapping(value = "/{session_id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{session_id}/active", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> putActiveChargingProfile(
         @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
         @PathVariable("session_id") @Size(min = 1, max = 36) String sessionId,

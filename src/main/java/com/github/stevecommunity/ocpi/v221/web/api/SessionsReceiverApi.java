@@ -1,6 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.web.api;
 
 import com.github.stevecommunity.ocpi.v221.model.sessions.Session;
+import com.github.stevecommunity.ocpi.v221.model.sessions.SessionPatch;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponseVoid;
@@ -52,7 +53,7 @@ public interface SessionsReceiverApi {
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
         @PathVariable("session_id") @Size(min = 1, max = 36) String sessionId,
-        @RequestBody Session session
+        @Valid @RequestBody SessionPatch session
     ) {
         throw new RuntimeException("Not implemented");
     }

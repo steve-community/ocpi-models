@@ -42,7 +42,7 @@ public interface TokensSenderApi {
     default ResponseEntity<OcpiResponse<AuthorizationInfo>> authorizeToken(
         @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
         @PathVariable("token_uid") @Size(min = 1, max = 36) String tokenUid,
-        @RequestParam(required = false) TokenType type,
+        @RequestParam(required = false, defaultValue = "RFID") TokenType type,
         @RequestBody(required = false) LocationReferences locationReferences
     ) {
         throw new RuntimeException("Not implemented");
