@@ -1,7 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.web.api;
 
 import com.github.stevecommunity.ocpi.v221.model.hubclientinfo.ClientInfo;
-import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
+import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeadersBase;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponseVoid;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -26,7 +26,7 @@ public interface HubClientInfoReceiverApi {
 
     @GetMapping("/{country_code}/{party_id}")
     default ResponseEntity<OcpiResponse<ClientInfo>> getClientInfo(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers,
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId
     ) {
@@ -35,7 +35,7 @@ public interface HubClientInfoReceiverApi {
 
     @PutMapping(value = "/{country_code}/{party_id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> putClientInfo(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers,
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
         @Valid @RequestBody ClientInfo clientInfo

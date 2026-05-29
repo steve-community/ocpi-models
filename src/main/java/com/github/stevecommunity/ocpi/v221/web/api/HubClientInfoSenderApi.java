@@ -1,7 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.web.api;
 
 import com.github.stevecommunity.ocpi.v221.model.hubclientinfo.ClientInfo;
-import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
+import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeadersBase;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestParameters;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -24,7 +24,7 @@ public interface HubClientInfoSenderApi {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<List<ClientInfo>>> getClientInfos(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers,
         @Valid @ParameterObject OcpiRequestParameters params
     ) {
         throw new RuntimeException("Not implemented");

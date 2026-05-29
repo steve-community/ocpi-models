@@ -15,11 +15,20 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Set;
+import java.util.function.Consumer;
+
 @AutoConfiguration
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class OcpiAutoConfiguration {
 
     public static final String OCPI_AUTH_SCHEME = "ocpiAuth";
+
+    private static final Set<String> NO_ROUTING_PATHS = Set.of(
+        "/ocpi/2.2.1/credentials",
+        "/ocpi/2.2.1/hubclientinfo",
+        "/ocpi/versions"
+    );
 
     @Bean
     @ConditionalOnMissingBean
@@ -47,8 +56,14 @@ public class OcpiAutoConfiguration {
             for (var pathEntry : openApi.getPaths().entrySet()) {
                 String path = pathEntry.getKey();
                 if (path.startsWith("/ocpi")) {
+                    boolean isNoRouting = NO_ROUTING_PATHS.stream().anyMatch(path::startsWith);
+
+                    Consumer<Operation> action = isNoRouting
+                        ? OcpiAutoConfiguration::addOcpiHeadersNoRouting
+                        : OcpiAutoConfiguration::addOcpiHeadersWithRouting;
+
                     for (Operation operation : pathEntry.getValue().readOperations()) {
-                        addOcpiHeaders(operation);
+                        action.accept(operation);
                     }
                 }
             }
@@ -69,9 +84,14 @@ public class OcpiAutoConfiguration {
         openApi.getComponents().addSecuritySchemes(OCPI_AUTH_SCHEME, securityScheme);
     }
 
-    private static void addOcpiHeaders(Operation operation) {
+    private static void addOcpiHeadersNoRouting(Operation operation) {
         operation.addParametersItem(header("X-Request-ID", true));
         operation.addParametersItem(header("X-Correlation-ID", true));
+    }
+
+    private static void addOcpiHeadersWithRouting(Operation operation) {
+        addOcpiHeadersNoRouting(operation);
+
         operation.addParametersItem(header("OCPI-from-country-code", false));
         operation.addParametersItem(header("OCPI-from-party-id", false));
         operation.addParametersItem(header("OCPI-to-country-code", false));

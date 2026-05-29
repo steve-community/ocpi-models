@@ -5,15 +5,12 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.web.context.request.NativeWebRequest;
 
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Getter
 @Setter
 @ToString
-public class OcpiRequestHeaders {
-    @NotNull String xRequestId;
-    @NotNull String xCorrelationId;
+public class OcpiRequestHeaders extends OcpiRequestHeadersBase {
     @Size(min = 2, max = 2) String fromCountryCode;
     @Size(min = 3, max = 3) String fromPartyId;
     @Size(min = 2, max = 2) String toCountryCode;

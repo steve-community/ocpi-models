@@ -1,7 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.web.api;
 
 import com.github.stevecommunity.ocpi.v221.model.credentials.Credentials;
-import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
+import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeadersBase;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponseVoid;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -26,14 +26,14 @@ public interface CredentialsApi {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<Credentials>> getCredentials(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers
+        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers
     ) {
         throw new RuntimeException("Not implemented");
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponse<Credentials>> postCredentials(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers,
         @Valid @RequestBody Credentials credentials
     ) {
         throw new RuntimeException("Not implemented");
@@ -41,7 +41,7 @@ public interface CredentialsApi {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponse<Credentials>> putCredentials(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers,
         @Valid @RequestBody Credentials credentials
     ) {
         throw new RuntimeException("Not implemented");
@@ -49,7 +49,7 @@ public interface CredentialsApi {
 
     @DeleteMapping
     default ResponseEntity<OcpiResponseVoid> deleteCredentials(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers
+        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers
     ) {
         throw new RuntimeException("Not implemented");
     }
