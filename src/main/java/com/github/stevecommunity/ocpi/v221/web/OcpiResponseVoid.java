@@ -11,5 +11,5 @@ import java.time.Instant;
 public class OcpiResponseVoid {
     @NotNull StatusCode status_code;
     String status_message;
-    final Instant timestamp = Instant.now();
+    @NotNull final Instant timestamp = Instant.now();
 }

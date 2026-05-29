@@ -9,8 +9,8 @@ import java.time.Instant;
 @Data
 @Builder
 public class OcpiResponse<T> {
-    T data;
+    @NotNull T data;
     @NotNull StatusCode status_code;
     String status_message;
-    final Instant timestamp = Instant.now();
+    @NotNull final Instant timestamp = Instant.now();
 }
