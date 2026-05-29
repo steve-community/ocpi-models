@@ -1,8 +1,11 @@
 package com.github.stevecommunity.ocpi.v221.web.api;
 
 import com.github.stevecommunity.ocpi.v221.model.locations.Connector;
+import com.github.stevecommunity.ocpi.v221.model.locations.ConnectorPatch;
 import com.github.stevecommunity.ocpi.v221.model.locations.Evse;
+import com.github.stevecommunity.ocpi.v221.model.locations.EvsePatch;
 import com.github.stevecommunity.ocpi.v221.model.locations.Location;
+import com.github.stevecommunity.ocpi.v221.model.locations.LocationPatch;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponseVoid;
@@ -54,7 +57,7 @@ public interface LocationReceiverApi {
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
         @PathVariable("location_id") @Size(min = 1, max = 36) String locationId,
-        @RequestBody Location location
+        @Valid @RequestBody LocationPatch location
     ) {
         throw new RuntimeException("Not implemented");
     }
@@ -89,7 +92,7 @@ public interface LocationReceiverApi {
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
         @PathVariable("location_id") @Size(min = 1, max = 36) String locationId,
         @PathVariable("evse_uid") @Size(min = 1, max = 36) String evseUid,
-        @RequestBody Evse evse
+        @Valid @RequestBody EvsePatch evse
     ) {
         throw new RuntimeException("Not implemented");
     }
@@ -127,7 +130,7 @@ public interface LocationReceiverApi {
         @PathVariable("location_id") @Size(min = 1, max = 36) String locationId,
         @PathVariable("evse_uid") @Size(min = 1, max = 36) String evseUid,
         @PathVariable("connector_id") @Size(min = 1, max = 36) String connectorId,
-        @RequestBody Connector connector
+        @Valid @RequestBody ConnectorPatch connector
     ) {
         throw new RuntimeException("Not implemented");
     }
