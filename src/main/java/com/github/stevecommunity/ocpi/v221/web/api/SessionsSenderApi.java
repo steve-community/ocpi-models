@@ -12,7 +12,6 @@ import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +29,7 @@ public interface SessionsSenderApi {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<List<Session>>> getSessions(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @Valid @ParameterObject OcpiRequestParameters params
     ) {
         throw new RuntimeException("Not implemented");
@@ -38,7 +37,7 @@ public interface SessionsSenderApi {
 
     @PutMapping(value = "/{session_id}/charging_preferences", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponse<ChargingPreferencesResponse>> putChargingPreferences(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("session_id") @Size(min = 1, max = 36) String sessionId,
         @Valid @RequestBody ChargingPreferences chargingPreferences
     ) {

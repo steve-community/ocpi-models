@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +23,7 @@ public interface CommandsSenderApi {
 
     @PostMapping(value = "/{command}", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> postCommandResult(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("command") CommandType command,
         @Valid @RequestBody CommandResult result
     ) {

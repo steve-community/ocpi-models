@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +28,7 @@ public interface ChargingProfilesReceiverApi {
 
     @GetMapping("/{session_id}")
     default ResponseEntity<OcpiResponse<ChargingProfileResponse>> getActiveChargingProfile(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("session_id") @Size(min = 1, max = 36) String sessionId,
         @RequestParam @Min(0) Integer duration,
         @RequestParam("response_url") String responseUrl
@@ -39,7 +38,7 @@ public interface ChargingProfilesReceiverApi {
 
     @PutMapping(value = "/{session_id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponse<ChargingProfileResponse>> putChargingProfile(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("session_id") @Size(min = 1, max = 36) String sessionId,
         @Valid @RequestBody SetChargingProfile chargingProfile
     ) {
@@ -48,7 +47,7 @@ public interface ChargingProfilesReceiverApi {
 
     @DeleteMapping("/{session_id}")
     default ResponseEntity<OcpiResponse<ChargingProfileResponse>> deleteChargingProfile(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("session_id") @Size(min = 1, max = 36) String sessionId,
         @RequestParam("response_url") String responseUrl
     ) {

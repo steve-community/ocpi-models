@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,7 +29,7 @@ public interface TokensReceiverApi {
 
     @GetMapping("/{country_code}/{party_id}/{token_uid}")
     default ResponseEntity<OcpiResponse<Token>> getToken(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
         @PathVariable("token_uid") @Size(min = 1, max = 36) String tokenUid,
@@ -41,7 +40,7 @@ public interface TokensReceiverApi {
 
     @PutMapping(value = "/{country_code}/{party_id}/{token_uid}", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> putToken(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
         @PathVariable("token_uid") @Size(min = 1, max = 36) String tokenUid,
@@ -53,7 +52,7 @@ public interface TokensReceiverApi {
 
     @PatchMapping(value = "/{country_code}/{party_id}/{token_uid}", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> patchToken(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
         @PathVariable("token_uid") @Size(min = 1, max = 36) String tokenUid,

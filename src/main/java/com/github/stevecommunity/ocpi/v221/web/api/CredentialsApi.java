@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,14 +25,14 @@ public interface CredentialsApi {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<Credentials>> getCredentials(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers
+        @Parameter(hidden = true) @Valid OcpiRequestHeadersBase headers
     ) {
         throw new RuntimeException("Not implemented");
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponse<Credentials>> postCredentials(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeadersBase headers,
         @Valid @RequestBody Credentials credentials
     ) {
         throw new RuntimeException("Not implemented");
@@ -41,7 +40,7 @@ public interface CredentialsApi {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponse<Credentials>> putCredentials(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeadersBase headers,
         @Valid @RequestBody Credentials credentials
     ) {
         throw new RuntimeException("Not implemented");
@@ -49,7 +48,7 @@ public interface CredentialsApi {
 
     @DeleteMapping
     default ResponseEntity<OcpiResponseVoid> deleteCredentials(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers
+        @Parameter(hidden = true) @Valid OcpiRequestHeadersBase headers
     ) {
         throw new RuntimeException("Not implemented");
     }

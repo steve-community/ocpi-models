@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +26,7 @@ public interface CommandsReceiverApi {
 
     @PostMapping(value = "/CANCEL_RESERVATION", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponse<CommandResponse>> cancelReservation(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @Valid @RequestBody CancelReservation command
     ) {
         throw new RuntimeException("Not implemented");
@@ -35,7 +34,7 @@ public interface CommandsReceiverApi {
 
     @PostMapping(value = "/RESERVE_NOW", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponse<CommandResponse>> reserveNow(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @Valid @RequestBody ReserveNow command
     ) {
         throw new RuntimeException("Not implemented");
@@ -43,7 +42,7 @@ public interface CommandsReceiverApi {
 
     @PostMapping(value = "/START_SESSION", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponse<CommandResponse>> startSession(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @Valid @RequestBody StartSession command
     ) {
         throw new RuntimeException("Not implemented");
@@ -51,7 +50,7 @@ public interface CommandsReceiverApi {
 
     @PostMapping(value = "/STOP_SESSION", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponse<CommandResponse>> stopSession(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @Valid @RequestBody StopSession command
     ) {
         throw new RuntimeException("Not implemented");
@@ -59,7 +58,7 @@ public interface CommandsReceiverApi {
 
     @PostMapping(value = "/UNLOCK_CONNECTOR", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponse<CommandResponse>> unlockConnector(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @Valid @RequestBody UnlockConnector command
     ) {
         throw new RuntimeException("Not implemented");

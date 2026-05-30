@@ -10,7 +10,6 @@ import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
@@ -24,7 +23,7 @@ public interface HubClientInfoSenderApi {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<List<ClientInfo>>> getClientInfos(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeadersBase headers,
         @Valid @ParameterObject OcpiRequestParameters params
     ) {
         throw new RuntimeException("Not implemented");

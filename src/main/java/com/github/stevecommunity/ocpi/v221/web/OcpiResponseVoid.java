@@ -1,13 +1,13 @@
 package com.github.stevecommunity.ocpi.v221.web;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import jakarta.validation.constraints.NotNull;
 import java.time.Instant;
 
+@Accessors(chain = true)
 @Data
-@Builder
 public class OcpiResponseVoid {
     @NotNull StatusCode status_code;
     String status_message;

@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,7 +27,7 @@ public interface ChargingProfilesSenderApi {
 
     @PostMapping(value = "/response/active", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> postActiveChargingProfileResult(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @Valid @RequestBody ActiveChargingProfileResult result
     ) {
         throw new RuntimeException("Not implemented");
@@ -36,7 +35,7 @@ public interface ChargingProfilesSenderApi {
 
     @PostMapping(value = "/response/set", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> postChargingProfileResult(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @Valid @RequestBody ChargingProfileResult result
     ) {
         throw new RuntimeException("Not implemented");
@@ -44,7 +43,7 @@ public interface ChargingProfilesSenderApi {
 
     @PostMapping(value = "/response/clear", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> postClearProfileResult(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @Valid @RequestBody ClearProfileResult result
     ) {
         throw new RuntimeException("Not implemented");
@@ -52,7 +51,7 @@ public interface ChargingProfilesSenderApi {
 
     @PutMapping(value = "/{session_id}/active", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> putActiveChargingProfile(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("session_id") @Size(min = 1, max = 36) String sessionId,
         @Valid @RequestBody ActiveChargingProfile activeChargingProfile
     ) {

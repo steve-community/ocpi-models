@@ -1,6 +1,5 @@
 package com.github.stevecommunity.ocpi.config;
 
-import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeadersAdvice;
 import com.github.stevecommunity.ocpi.v221.web.VersionNumberConverter;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -14,7 +13,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -38,8 +40,19 @@ public class OcpiAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public OcpiRequestHeadersAdvice ocpiRequestHeadersAdvice() {
-        return new OcpiRequestHeadersAdvice();
+    public OcpiRequestHeadersArgumentResolver ocpiRequestHeadersArgumentResolver() {
+        return new OcpiRequestHeadersArgumentResolver();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(name = "ocpiWebMvcConfigurer")
+    public WebMvcConfigurer ocpiWebMvcConfigurer(OcpiRequestHeadersArgumentResolver resolver) {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+                resolvers.add(resolver);
+            }
+        };
     }
 
     @Bean

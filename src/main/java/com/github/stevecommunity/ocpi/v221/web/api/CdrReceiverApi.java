@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +25,7 @@ public interface CdrReceiverApi {
 
     @GetMapping("/{cdr_id}")
     default ResponseEntity<OcpiResponse<Cdr>> getCdr(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("cdr_id") @Size(min = 1, max = 39) String cdrId
     ) {
         throw new RuntimeException("Not implemented");
@@ -34,7 +33,7 @@ public interface CdrReceiverApi {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> postCdr(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @Valid @RequestBody Cdr cdr
     ) {
         throw new RuntimeException("Not implemented");

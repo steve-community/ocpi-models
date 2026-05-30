@@ -12,7 +12,6 @@ import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,7 +27,7 @@ public interface LocationSenderApi {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<List<Location>>> getLocations(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @Valid @ParameterObject OcpiRequestParameters params
     ) {
         throw new RuntimeException("Not implemented");
@@ -36,7 +35,7 @@ public interface LocationSenderApi {
 
     @GetMapping("/{location_id}")
     default ResponseEntity<OcpiResponse<Location>> getLocation(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("location_id") @Size(min = 1, max = 36) String locationId
     ) {
         throw new RuntimeException("Not implemented");
@@ -44,7 +43,7 @@ public interface LocationSenderApi {
 
     @GetMapping("/{location_id}/{evse_uid}")
     default ResponseEntity<OcpiResponse<Evse>> getEvse(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("location_id") @Size(min = 1, max = 36) String locationId,
         @PathVariable("evse_uid") @Size(min = 1, max = 36) String evseUid
     ) {
@@ -53,7 +52,7 @@ public interface LocationSenderApi {
 
     @GetMapping("/{location_id}/{evse_uid}/{connector_id}")
     default ResponseEntity<OcpiResponse<Connector>> getConnector(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("location_id") @Size(min = 1, max = 36) String locationId,
         @PathVariable("evse_uid") @Size(min = 1, max = 36) String evseUid,
         @PathVariable("connector_id") @Size(min = 1, max = 36) String connectorId

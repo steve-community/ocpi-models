@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +26,7 @@ public interface TariffsReceiverApi {
 
     @GetMapping("/{country_code}/{party_id}/{tariff_id}")
     default ResponseEntity<OcpiResponse<Tariff>> getTariff(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
         @PathVariable("tariff_id") @Size(min = 1, max = 36) String tariffId
@@ -37,7 +36,7 @@ public interface TariffsReceiverApi {
 
     @PutMapping(value = "/{country_code}/{party_id}/{tariff_id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> putTariff(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
         @PathVariable("tariff_id") @Size(min = 1, max = 36) String tariffId,
@@ -48,7 +47,7 @@ public interface TariffsReceiverApi {
 
     @DeleteMapping("/{country_code}/{party_id}/{tariff_id}")
     default ResponseEntity<OcpiResponseVoid> deleteTariff(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeaders headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeaders headers,
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
         @PathVariable("tariff_id") @Size(min = 1, max = 36) String tariffId

@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +25,7 @@ public interface HubClientInfoReceiverApi {
 
     @GetMapping("/{country_code}/{party_id}")
     default ResponseEntity<OcpiResponse<ClientInfo>> getClientInfo(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeadersBase headers,
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId
     ) {
@@ -35,7 +34,7 @@ public interface HubClientInfoReceiverApi {
 
     @PutMapping(value = "/{country_code}/{party_id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> putClientInfo(
-        @Parameter(hidden = true) @Valid @ModelAttribute OcpiRequestHeadersBase headers,
+        @Parameter(hidden = true) @Valid OcpiRequestHeadersBase headers,
         @PathVariable("country_code") @Size(min = 2, max = 2) String countryCode,
         @PathVariable("party_id") @Size(min = 3, max = 3) String partyId,
         @Valid @RequestBody ClientInfo clientInfo
