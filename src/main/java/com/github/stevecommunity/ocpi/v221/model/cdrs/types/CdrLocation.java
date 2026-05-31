@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -16,9 +17,9 @@ import jakarta.validation.constraints.Size;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class CdrLocation extends AbstractLocation implements AbstractLocationNullChecks {
-    @NotNull @Size(max = 36) String evse_uid;
-    @NotNull @Size(max = 48) String evse_id;
-    @NotNull @Size(max = 36) String connector_id;
+    @NotEmpty @Size(max = 36) String evse_uid;
+    @NotEmpty @Size(max = 48) String evse_id;
+    @NotEmpty @Size(max = 36) String connector_id;
     @NotNull ConnectorType connector_standard;
     @NotNull ConnectorFormat connector_format;
     @NotNull PowerType connector_power_type;

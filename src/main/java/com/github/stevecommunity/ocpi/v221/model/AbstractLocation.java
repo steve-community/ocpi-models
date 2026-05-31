@@ -3,6 +3,7 @@ package com.github.stevecommunity.ocpi.v221.model;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.GeoLocation;
 import lombok.Data;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 
 @Data
@@ -14,5 +15,5 @@ public abstract class AbstractLocation {
     @Size(max = 10) String postal_code;
     @Size(max = 20) String state;
     @Size(max = 3) String country;
-    GeoLocation coordinates;
+    @Valid GeoLocation coordinates;
 }

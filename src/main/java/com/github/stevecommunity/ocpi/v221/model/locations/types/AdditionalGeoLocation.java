@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import jakarta.validation.Valid;
+
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
@@ -12,5 +14,5 @@ public class AdditionalGeoLocation extends GeoLocation {
     /**
      * Name of the point.
      */
-    DisplayText name;
+    @Valid DisplayText name;
 }

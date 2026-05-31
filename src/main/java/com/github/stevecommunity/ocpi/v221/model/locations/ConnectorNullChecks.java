@@ -4,10 +4,11 @@ import com.github.stevecommunity.ocpi.v221.model.locations.types.ConnectorFormat
 import com.github.stevecommunity.ocpi.v221.model.locations.types.ConnectorType;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.PowerType;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public interface ConnectorNullChecks {
-    @NotNull String getId();
+    @NotEmpty String getId();
     @NotNull ConnectorType getStandard();
     @NotNull ConnectorFormat getFormat();
     @NotNull PowerType getPower_type();

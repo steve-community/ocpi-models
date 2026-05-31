@@ -3,14 +3,15 @@ package com.github.stevecommunity.ocpi.v221.model.cdrs.types;
 import com.github.stevecommunity.ocpi.v221.model.tokens.types.TokenType;
 import lombok.Data;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Data
 public class CdrToken {
-    @NotNull @Size(max = 2) String country_code;
-    @NotNull @Size(max = 3) String party_id;
-    @NotNull @Size(max = 36) String uid;
+    @NotEmpty @Size(max = 2) String country_code;
+    @NotEmpty @Size(max = 3) String party_id;
+    @NotEmpty @Size(max = 36) String uid;
     @NotNull TokenType type;
-    @NotNull @Size(max = 36) String contract_id;
+    @NotEmpty @Size(max = 36) String contract_id;
 }

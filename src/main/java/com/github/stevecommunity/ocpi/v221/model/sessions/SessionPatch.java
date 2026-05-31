@@ -7,6 +7,7 @@ import com.github.stevecommunity.ocpi.v221.model.cdrs.types.ChargingPeriod;
 import com.github.stevecommunity.ocpi.v221.model.sessions.types.SessionStatus;
 import lombok.Data;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.Instant;
@@ -20,7 +21,7 @@ public class SessionPatch {
     Instant start_date_time;
     Instant end_date_time;
     Double kwh;
-    CdrToken cdr_token;
+    @Valid CdrToken cdr_token;
     AuthMethod auth_method;
     @Size(max = 36) String authorization_reference;
     @Size(max = 36) String location_id;
@@ -28,8 +29,8 @@ public class SessionPatch {
     @Size(max = 36) String connector_id;
     @Size(max = 255) String meter_id;
     @Size(max = 3) String currency;
-    List<ChargingPeriod> charging_periods;
-    Price total_cost;
+    @Valid List<ChargingPeriod> charging_periods;
+    @Valid Price total_cost;
     SessionStatus status;
     @NotNull Instant last_updated;
 }

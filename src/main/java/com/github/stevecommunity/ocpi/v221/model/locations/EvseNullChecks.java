@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 public interface EvseNullChecks {
-    @NotNull String getUid();
+    @NotEmpty String getUid();
     @NotNull Status getStatus();
     @NotEmpty List<Connector> getConnectors();
 }

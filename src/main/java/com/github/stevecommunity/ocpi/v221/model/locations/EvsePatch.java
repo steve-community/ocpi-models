@@ -9,6 +9,7 @@ import com.github.stevecommunity.ocpi.v221.model.locations.types.Status;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.StatusSchedule;
 import lombok.Data;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.Instant;
@@ -19,14 +20,14 @@ public class EvsePatch {
     @Size(max = 36) String uid;
     @Size(max = 48) String evse_id;
     Status status;
-    List<StatusSchedule> status_schedule;
+    @Valid List<StatusSchedule> status_schedule;
     List<Capability> capabilities;
-    List<Connector> connectors;
+    @Valid List<Connector> connectors;
     @Size(max = 4) String floor_level;
-    GeoLocation coordinates;
+    @Valid GeoLocation coordinates;
     @Size(max = 16) String physical_reference;
-    List<DisplayText> directions;
+    @Valid List<DisplayText> directions;
     List<ParkingRestriction> parking_restrictions;
-    List<Image> images;
+    @Valid List<Image> images;
     @NotNull Instant last_updated;
 }

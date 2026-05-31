@@ -6,6 +6,7 @@ import com.github.stevecommunity.ocpi.v221.model.tokens.types.TokenType;
 import com.github.stevecommunity.ocpi.v221.model.tokens.types.WhitelistType;
 import lombok.Data;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.Instant;
@@ -24,6 +25,6 @@ public class TokenPatch {
     WhitelistType whitelist;
     @Size(max = 2) String language;
     ProfileType default_profile_type;
-    EnergyContract energy_contract;
+    @Valid EnergyContract energy_contract;
     @NotNull Instant last_updated;
 }

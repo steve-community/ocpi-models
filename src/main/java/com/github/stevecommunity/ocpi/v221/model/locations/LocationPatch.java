@@ -14,6 +14,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.Instant;
@@ -26,19 +27,19 @@ public class LocationPatch extends AbstractLocation {
     @Size(max = 2) String country_code;
     @Size(max = 3) String party_id;
     Boolean publish;
-    List<PublishTokenType> publish_allowed_to;
-    List<AdditionalGeoLocation> related_locations;
+    @Valid List<PublishTokenType> publish_allowed_to;
+    @Valid List<AdditionalGeoLocation> related_locations;
     ParkingType parking_type;
-    List<Evse> evses;
-    List<DisplayText> directions;
-    BusinessDetails operator;
-    BusinessDetails suboperator;
-    BusinessDetails owner;
+    @Valid List<Evse> evses;
+    @Valid List<DisplayText> directions;
+    @Valid BusinessDetails operator;
+    @Valid BusinessDetails suboperator;
+    @Valid BusinessDetails owner;
     List<Facility> facilities;
     @Size(max = 255) String time_zone;
-    Hours opening_times;
+    @Valid Hours opening_times;
     Boolean charging_when_closed;
-    List<Image> images;
-    EnergyMix energy_mix;
+    @Valid List<Image> images;
+    @Valid EnergyMix energy_mix;
     @NotNull Instant last_updated;
 }
