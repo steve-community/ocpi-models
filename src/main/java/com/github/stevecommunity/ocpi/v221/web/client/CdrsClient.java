@@ -5,8 +5,8 @@ import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestParameters;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponseVoid;
-import com.github.stevecommunity.ocpi.v221.web.api.CdrReceiverApi;
-import com.github.stevecommunity.ocpi.v221.web.api.CdrSenderApi;
+import com.github.stevecommunity.ocpi.v221.web.api.CdrsReceiverApi;
+import com.github.stevecommunity.ocpi.v221.web.api.CdrsSenderApi;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Objects;
 
-public class CdrClient extends AbstractClient implements CdrReceiverApi, CdrSenderApi {
+public class CdrsClient extends AbstractClient implements CdrsReceiverApi, CdrsSenderApi {
 
     private static final ParameterizedTypeReference<OcpiResponse<Cdr>> CDR_RESPONSE = new ParameterizedTypeReference<>() {
     };
@@ -25,8 +25,8 @@ public class CdrClient extends AbstractClient implements CdrReceiverApi, CdrSend
 
     private final RestTemplate restTemplate;
 
-    public CdrClient(RestTemplate restTemplate, String cdrEndpointRoot, String authorizationToken) {
-        super(cdrEndpointRoot, authorizationToken);
+    public CdrsClient(RestTemplate restTemplate, String cdrsEndpointRoot, String authorizationToken) {
+        super(cdrsEndpointRoot, authorizationToken);
         this.restTemplate = Objects.requireNonNull(restTemplate, "restTemplate must not be null");
     }
 

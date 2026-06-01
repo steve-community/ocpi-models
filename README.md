@@ -131,7 +131,7 @@ Each client expects the full module endpoint root discovered through OCPI versio
 ```java
 RestTemplate restTemplate = new RestTemplate();
 
-CdrClient cdrClient = new CdrClient(
+CdrsClient cdrsClient = new CdrsClient(
     restTemplate,
     "https://cpo.example.com/ocpi/2.2.1/cdrs",
     "my-ocpi-token"
@@ -146,7 +146,7 @@ OcpiRequestHeaders headers = OcpiRequestHeaders.builder()
     .toPartyId("CPO")
     .build();
 
-ResponseEntity<OcpiResponse<Cdr>> response = cdrClient.getCdr(headers, "cdr-123");
+ResponseEntity<OcpiResponse<Cdr>> response = cdrsClient.getCdr(headers, "cdr-123");
 ```
 
 Client classes can be found in package `com.github.stevecommunity.ocpi.v221.web.client`.

@@ -10,8 +10,8 @@ import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestParameters;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponseVoid;
-import com.github.stevecommunity.ocpi.v221.web.api.LocationReceiverApi;
-import com.github.stevecommunity.ocpi.v221.web.api.LocationSenderApi;
+import com.github.stevecommunity.ocpi.v221.web.api.LocationsReceiverApi;
+import com.github.stevecommunity.ocpi.v221.web.api.LocationsSenderApi;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -21,7 +21,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Objects;
 
-public class LocationClient extends AbstractClient implements LocationReceiverApi, LocationSenderApi {
+public class LocationsClient extends AbstractClient implements LocationsReceiverApi, LocationsSenderApi {
 
     private static final String LOCATION_PATH   = "/{country_code}/{party_id}/{location_id}";
     private static final String EVSE_PATH       = "/{country_code}/{party_id}/{location_id}/{evse_uid}";
@@ -38,7 +38,7 @@ public class LocationClient extends AbstractClient implements LocationReceiverAp
 
     private final RestTemplate restTemplate;
 
-    public LocationClient(RestTemplate restTemplate, String locationsEndpointRoot, String authorizationToken) {
+    public LocationsClient(RestTemplate restTemplate, String locationsEndpointRoot, String authorizationToken) {
         super(locationsEndpointRoot, authorizationToken);
         this.restTemplate = Objects.requireNonNull(restTemplate, "restTemplate must not be null");
     }

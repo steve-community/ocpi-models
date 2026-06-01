@@ -23,7 +23,7 @@ import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_A
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
 @RequestMapping(value = "/ocpi/2.2.1/locations", produces = MediaType.APPLICATION_JSON_VALUE)
-public interface LocationSenderApi {
+public interface LocationsSenderApi {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<List<Location>>> getLocations(
