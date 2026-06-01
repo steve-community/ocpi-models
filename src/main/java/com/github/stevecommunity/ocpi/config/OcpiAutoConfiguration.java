@@ -4,12 +4,14 @@ import com.github.stevecommunity.ocpi.v221.web.VersionNumberConverter;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
+import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springdoc.core.customizers.OpenApiCustomizer;
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
@@ -56,11 +58,24 @@ public class OcpiAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnClass(OpenApiCustomizer.class)
-    @ConditionalOnMissingBean(name = "ocpiCustomizer")
-    public OpenApiCustomizer ocpiCustomizer() {
+    @ConditionalOnMissingBean(name = "ocpiApi")
+    public GroupedOpenApi ocpiApi() {
+        return GroupedOpenApi.builder()
+            .group("ocpi")
+            .displayName("OCPI")
+            .pathsToMatch("/ocpi/**")
+            .addOpenApiCustomizer(ocpiCustomizer())
+            .build();
+    }
+
+    private static OpenApiCustomizer ocpiCustomizer() {
         return openApi -> {
             addOcpiAuthScheme(openApi);
+
+            openApi.setInfo(new Info().title("OCPI 2.2.1"));
+
+            // https://stackoverflow.com/a/68185254
+            openApi.setServers(List.of(new Server().url("/").description("Default Server URL")));
 
             if (openApi.getPaths() == null) {
                 return;
