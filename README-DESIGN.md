@@ -176,3 +176,62 @@ default ResponseEntity<OcpiResponse<List<Cdr>>> getCdrs(
 
 The behavior is similar, but the API surface is much noisier because every header and request parameter becomes part of the endpoint signature.
 Now imagine that level of method-signature verbosity repeated across all OCPI endpoints.
+
+## 4. PUT and PATCH Models Share Shape but Not Null Checks
+
+OCPI often defines the same object shape for full replacement and partial update endpoints.
+A `PUT` request must carry a complete object, while a `PATCH` request should only carry the fields that are changing.
+That means most field constraints, such as `@Size`, nested `@Valid`, enum types, and `last_updated`, should be shared.
+The required-field null checks, however, are different.
+
+For example, [LocationPatch](src/main/java/com/github/stevecommunity/ocpi/v221/model/locations/LocationPatch.java) can reuse the full location field set while keeping most fields optional:
+
+```java
+@Data
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+public class LocationPatch extends AbstractLocation {
+    @Size(max = 2) String country_code;
+    @Size(max = 3) String party_id;
+    Boolean publish;
+    @Valid List<PublishTokenType> publish_allowed_to;
+    @Valid List<AdditionalGeoLocation> related_locations;
+    ParkingType parking_type;
+    @Valid List<Evse> evses;
+    @Valid List<DisplayText> directions;
+    @Valid BusinessDetails operator;
+    @Valid BusinessDetails suboperator;
+    @Valid BusinessDetails owner;
+    List<Facility> facilities;
+    @Size(max = 255) String time_zone;
+    @Valid Hours opening_times;
+    Boolean charging_when_closed;
+    @Valid List<Image> images;
+    @Valid EnergyMix energy_mix;
+    @NotNull Instant last_updated;
+}
+```
+
+The [LocationNullChecks](src/main/java/com/github/stevecommunity/ocpi/v221/model/locations/LocationNullChecks.java) interface defines the required-field constraints needed by the full object:
+
+```java
+public interface LocationNullChecks extends AbstractLocationNullChecks {
+    @NotEmpty String getCountry_code();
+    @NotEmpty String getParty_id();
+    @NotNull Boolean getPublish();
+    @NotEmpty String getTime_zone();
+}
+```
+
+The full [Location](src/main/java/com/github/stevecommunity/ocpi/v221/model/locations/Location.java) model then composes the patch shape with those required-field constraints:
+
+```java
+public class Location extends LocationPatch implements LocationNullChecks {
+}
+```
+
+This keeps the PATCH model permissive without duplicating the whole object model.
+It also keeps the PUT model strict without requiring validation groups on every endpoint.
+The approach remains compatible with Jakarta validation because constraints declared on interface getters are part of the Bean Validation model.
+It is also friendly to OpenAPI generation because the public full-object type still has a concrete Java class, while the patch type remains a separate concrete Java class.
+The same pattern is used for [Location](src/main/java/com/github/stevecommunity/ocpi/v221/model/locations/Location.java), [Evse](src/main/java/com/github/stevecommunity/ocpi/v221/model/locations/Evse.java), [Connector](src/main/java/com/github/stevecommunity/ocpi/v221/model/locations/Connector.java), [Session](src/main/java/com/github/stevecommunity/ocpi/v221/model/sessions/Session.java), and [Token](src/main/java/com/github/stevecommunity/ocpi/v221/model/tokens/Token.java).
