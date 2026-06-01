@@ -2,6 +2,7 @@ package com.github.stevecommunity.ocpi.v221.model.versions.types;
 
 import lombok.Data;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -9,5 +10,5 @@ import jakarta.validation.constraints.Size;
 public class Endpoint {
     @NotNull ModuleID identifier;
     @NotNull InterfaceRole role;
-    @NotNull @Size(max = 255) String url;
+    @NotEmpty @Size(max = 255) String url;
 }

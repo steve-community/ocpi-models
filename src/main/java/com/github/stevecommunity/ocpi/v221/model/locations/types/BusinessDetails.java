@@ -2,7 +2,8 @@ package com.github.stevecommunity.ocpi.v221.model.locations.types;
 
 import lombok.Data;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 @Data
@@ -10,7 +11,7 @@ public class BusinessDetails {
     /**
      * Name of the operator.
      */
-    @NotNull @Size(max = 100) String name;
+    @NotEmpty @Size(max = 100) String name;
 
     /**
      * Website of the operator.
@@ -20,5 +21,5 @@ public class BusinessDetails {
     /**
      * Logo of the operator.
      */
-    Image logo;
+    @Valid Image logo;
 }
