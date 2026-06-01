@@ -58,6 +58,7 @@ Lombok hides the boilerplate.
 Applications choose which role/module interfaces to implement.
 
 The goal is to keep software code plumbing out of application code where a compact library abstraction can carry it instead.
+For more detail on these tradeoffs, see [README-DESIGN.md](README-DESIGN.md).
 
 ## Examples
 
