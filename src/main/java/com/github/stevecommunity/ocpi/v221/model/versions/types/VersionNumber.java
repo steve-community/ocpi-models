@@ -28,4 +28,8 @@ public enum VersionNumber {
         throw new IllegalArgumentException("Unsupported OCPI version: " + value);
     }
 
+    @Override
+    public String toString() {
+        return value;
+    }
 }
