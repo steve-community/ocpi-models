@@ -6,6 +6,7 @@ import com.github.stevecommunity.ocpi.v221.model.locations.Evse;
 import com.github.stevecommunity.ocpi.v221.model.locations.EvsePatch;
 import com.github.stevecommunity.ocpi.v221.model.locations.Location;
 import com.github.stevecommunity.ocpi.v221.model.locations.LocationPatch;
+import com.github.stevecommunity.ocpi.v221.web.OcpiApi;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponseVoid;
@@ -26,8 +27,8 @@ import jakarta.validation.constraints.Size;
 import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_AUTH_SCHEME;
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
-@RequestMapping(value = "/ocpi/2.2.1/locations", produces = MediaType.APPLICATION_JSON_VALUE)
-public interface LocationsReceiverApi {
+@RequestMapping(value = OcpiApi.LOCATIONS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+public interface LocationsReceiverApi extends OcpiApi.Receiver.Locations {
 
     @GetMapping("/{country_code}/{party_id}/{location_id}")
     default ResponseEntity<OcpiResponse<Location>> getLocation(

@@ -1,6 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.web.api;
 
 import com.github.stevecommunity.ocpi.v221.model.hubclientinfo.ClientInfo;
+import com.github.stevecommunity.ocpi.v221.web.OcpiApi;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeadersBase;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponseVoid;
@@ -20,8 +21,8 @@ import jakarta.validation.constraints.Size;
 import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_AUTH_SCHEME;
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
-@RequestMapping(value = "/ocpi/2.2.1/hubclientinfo", produces = MediaType.APPLICATION_JSON_VALUE)
-public interface HubClientInfoReceiverApi {
+@RequestMapping(value = OcpiApi.HUB_CLIENT_INFO_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+public interface HubClientInfoReceiverApi extends OcpiApi.Receiver.HubClientInfo {
 
     @GetMapping("/{country_code}/{party_id}")
     default ResponseEntity<OcpiResponse<ClientInfo>> getClientInfo(

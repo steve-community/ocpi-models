@@ -3,6 +3,7 @@ package com.github.stevecommunity.ocpi.v221.web.api;
 import com.github.stevecommunity.ocpi.v221.model.locations.Connector;
 import com.github.stevecommunity.ocpi.v221.model.locations.Evse;
 import com.github.stevecommunity.ocpi.v221.model.locations.Location;
+import com.github.stevecommunity.ocpi.v221.web.OcpiApi;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestParameters;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
@@ -22,8 +23,8 @@ import java.util.List;
 import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_AUTH_SCHEME;
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
-@RequestMapping(value = "/ocpi/2.2.1/locations", produces = MediaType.APPLICATION_JSON_VALUE)
-public interface LocationsSenderApi {
+@RequestMapping(value = OcpiApi.LOCATIONS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+public interface LocationsSenderApi extends OcpiApi.Sender.Locations {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<List<Location>>> getLocations(

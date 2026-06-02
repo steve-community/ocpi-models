@@ -1,6 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.web.api;
 
 import com.github.stevecommunity.ocpi.v221.model.credentials.Credentials;
+import com.github.stevecommunity.ocpi.v221.web.OcpiApi;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeadersBase;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponseVoid;
@@ -20,7 +21,7 @@ import jakarta.validation.Valid;
 import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_AUTH_SCHEME;
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
-@RequestMapping(value = "/ocpi/2.2.1/credentials", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = OcpiApi.CREDENTIALS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
 public interface CredentialsApi {
 
     @GetMapping

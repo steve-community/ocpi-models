@@ -3,6 +3,7 @@ package com.github.stevecommunity.ocpi.v221.web.api;
 import com.github.stevecommunity.ocpi.v221.model.tokens.Token;
 import com.github.stevecommunity.ocpi.v221.model.tokens.TokenPatch;
 import com.github.stevecommunity.ocpi.v221.model.tokens.types.TokenType;
+import com.github.stevecommunity.ocpi.v221.web.OcpiApi;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponseVoid;
@@ -24,8 +25,8 @@ import jakarta.validation.constraints.Size;
 import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_AUTH_SCHEME;
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
-@RequestMapping(value = "/ocpi/2.2.1/tokens", produces = MediaType.APPLICATION_JSON_VALUE)
-public interface TokensReceiverApi {
+@RequestMapping(value = OcpiApi.TOKENS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+public interface TokensReceiverApi extends OcpiApi.Receiver.Tokens {
 
     @GetMapping("/{country_code}/{party_id}/{token_uid}")
     default ResponseEntity<OcpiResponse<Token>> getToken(

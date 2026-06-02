@@ -3,6 +3,7 @@ package com.github.stevecommunity.ocpi.v221.web.api;
 import com.github.stevecommunity.ocpi.v221.model.sessions.ChargingPreferences;
 import com.github.stevecommunity.ocpi.v221.model.sessions.Session;
 import com.github.stevecommunity.ocpi.v221.model.sessions.types.ChargingPreferencesResponse;
+import com.github.stevecommunity.ocpi.v221.web.OcpiApi;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestParameters;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
@@ -24,8 +25,8 @@ import java.util.List;
 import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_AUTH_SCHEME;
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
-@RequestMapping(value = "/ocpi/2.2.1/sessions", produces = MediaType.APPLICATION_JSON_VALUE)
-public interface SessionsSenderApi {
+@RequestMapping(value = OcpiApi.SESSIONS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+public interface SessionsSenderApi extends OcpiApi.Sender.Sessions {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<List<Session>>> getSessions(

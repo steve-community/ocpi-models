@@ -1,6 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.web.api;
 
 import com.github.stevecommunity.ocpi.v221.model.tariffs.Tariff;
+import com.github.stevecommunity.ocpi.v221.web.OcpiApi;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestParameters;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
@@ -18,8 +19,8 @@ import java.util.List;
 import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_AUTH_SCHEME;
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
-@RequestMapping(value = "/ocpi/2.2.1/tariffs", produces = MediaType.APPLICATION_JSON_VALUE)
-public interface TariffsSenderApi {
+@RequestMapping(value = OcpiApi.TARIFFS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+public interface TariffsSenderApi extends OcpiApi.Sender.Tariffs {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<List<Tariff>>> getTariffs(

@@ -94,8 +94,8 @@ The sender interface for the Tariffs module stays similarly compact:
 
 ```java
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
-@RequestMapping(value = "/ocpi/2.2.1/tariffs", produces = MediaType.APPLICATION_JSON_VALUE)
-public interface TariffsSenderApi {
+@RequestMapping(value = OcpiApi.TARIFFS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+public interface TariffsSenderApi extends OcpiApi.Sender.Tariffs {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<List<Tariff>>> getTariffs(

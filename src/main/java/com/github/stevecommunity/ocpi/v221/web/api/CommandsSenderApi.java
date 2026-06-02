@@ -2,6 +2,7 @@ package com.github.stevecommunity.ocpi.v221.web.api;
 
 import com.github.stevecommunity.ocpi.v221.model.commands.CommandResult;
 import com.github.stevecommunity.ocpi.v221.model.commands.types.CommandType;
+import com.github.stevecommunity.ocpi.v221.web.OcpiApi;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponseVoid;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -18,8 +19,8 @@ import jakarta.validation.Valid;
 import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_AUTH_SCHEME;
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
-@RequestMapping(value = "/ocpi/2.2.1/commands", produces = MediaType.APPLICATION_JSON_VALUE)
-public interface CommandsSenderApi {
+@RequestMapping(value = OcpiApi.COMMANDS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+public interface CommandsSenderApi extends OcpiApi.Sender.Commands {
 
     @PostMapping(value = "/{command}", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> postCommandResult(

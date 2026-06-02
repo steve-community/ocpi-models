@@ -3,6 +3,7 @@ package com.github.stevecommunity.ocpi.v221.web.api;
 import com.github.stevecommunity.ocpi.v221.model.versions.Version;
 import com.github.stevecommunity.ocpi.v221.model.versions.VersionDetails;
 import com.github.stevecommunity.ocpi.v221.model.versions.types.VersionNumber;
+import com.github.stevecommunity.ocpi.v221.web.OcpiApi;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeadersBase;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -19,7 +20,7 @@ import java.util.List;
 import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_AUTH_SCHEME;
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
-@RequestMapping(value = "/ocpi/versions", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = OcpiApi.VERSIONS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
 public interface VersionsApi {
 
     @GetMapping

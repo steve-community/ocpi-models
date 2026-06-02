@@ -1,5 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.web.client;
 
+import com.github.stevecommunity.ocpi.v221.model.versions.types.InterfaceRole;
+import com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeadersBase;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestParameters;
@@ -21,6 +23,18 @@ public abstract class AbstractClient {
     protected AbstractClient(String endpointRoot, String authorizationToken) {
         this.endpointRoot = normalizeEndpointRoot(endpointRoot);
         this.authorizationToken = normalizeAuthorizationToken(authorizationToken);
+    }
+
+    public ModuleID getId() {
+        return null;
+    }
+
+    public String getPath() {
+        return null;
+    }
+
+    public InterfaceRole getRole() {
+        return null;
     }
 
     protected HttpHeaders httpHeaders(OcpiRequestHeadersBase ocpiHeaders) {

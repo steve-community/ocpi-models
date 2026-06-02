@@ -4,6 +4,7 @@ import com.github.stevecommunity.ocpi.v221.model.tokens.AuthorizationInfo;
 import com.github.stevecommunity.ocpi.v221.model.tokens.Token;
 import com.github.stevecommunity.ocpi.v221.model.tokens.types.LocationReferences;
 import com.github.stevecommunity.ocpi.v221.model.tokens.types.TokenType;
+import com.github.stevecommunity.ocpi.v221.web.OcpiApi;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestParameters;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
@@ -26,8 +27,8 @@ import java.util.List;
 import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_AUTH_SCHEME;
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
-@RequestMapping(value = "/ocpi/2.2.1/tokens", produces = MediaType.APPLICATION_JSON_VALUE)
-public interface TokensSenderApi {
+@RequestMapping(value = OcpiApi.TOKENS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+public interface TokensSenderApi extends OcpiApi.Sender.Tokens {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<List<Token>>> getTokens(

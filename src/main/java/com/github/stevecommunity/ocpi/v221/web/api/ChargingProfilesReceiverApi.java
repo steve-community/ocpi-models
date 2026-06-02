@@ -2,6 +2,7 @@ package com.github.stevecommunity.ocpi.v221.web.api;
 
 import com.github.stevecommunity.ocpi.v221.model.chargingprofiles.ChargingProfileResponse;
 import com.github.stevecommunity.ocpi.v221.model.chargingprofiles.SetChargingProfile;
+import com.github.stevecommunity.ocpi.v221.web.OcpiApi;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -23,8 +24,8 @@ import jakarta.validation.constraints.Size;
 import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_AUTH_SCHEME;
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
-@RequestMapping(value = "/ocpi/2.2.1/chargingprofiles", produces = MediaType.APPLICATION_JSON_VALUE)
-public interface ChargingProfilesReceiverApi {
+@RequestMapping(value = OcpiApi.CHARGING_PROFILES_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+public interface ChargingProfilesReceiverApi extends OcpiApi.Receiver.ChargingProfiles {
 
     @GetMapping("/{session_id}")
     default ResponseEntity<OcpiResponse<ChargingProfileResponse>> getActiveChargingProfile(

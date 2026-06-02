@@ -6,6 +6,7 @@ import com.github.stevecommunity.ocpi.v221.model.commands.ReserveNow;
 import com.github.stevecommunity.ocpi.v221.model.commands.StartSession;
 import com.github.stevecommunity.ocpi.v221.model.commands.StopSession;
 import com.github.stevecommunity.ocpi.v221.model.commands.UnlockConnector;
+import com.github.stevecommunity.ocpi.v221.web.OcpiApi;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestHeaders;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,8 +22,8 @@ import jakarta.validation.Valid;
 import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_AUTH_SCHEME;
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
-@RequestMapping(value = "/ocpi/2.2.1/commands", produces = MediaType.APPLICATION_JSON_VALUE)
-public interface CommandsReceiverApi {
+@RequestMapping(value = OcpiApi.COMMANDS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+public interface CommandsReceiverApi extends OcpiApi.Receiver.Commands {
 
     @PostMapping(value = "/CANCEL_RESERVATION", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponse<CommandResponse>> cancelReservation(
