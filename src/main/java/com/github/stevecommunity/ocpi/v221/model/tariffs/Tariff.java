@@ -6,6 +6,7 @@ import com.github.stevecommunity.ocpi.v221.model.locations.types.EnergyMix;
 import com.github.stevecommunity.ocpi.v221.model.tariffs.types.TariffElement;
 import com.github.stevecommunity.ocpi.v221.model.tariffs.types.TariffType;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
@@ -14,6 +15,7 @@ import jakarta.validation.constraints.Size;
 import java.time.Instant;
 import java.util.List;
 
+@Accessors(chain = true)
 @Data
 public class Tariff {
     @NotEmpty @Size(max = 2) String country_code;

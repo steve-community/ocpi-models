@@ -8,6 +8,7 @@ import com.github.stevecommunity.ocpi.v221.model.locations.types.ParkingRestrict
 import com.github.stevecommunity.ocpi.v221.model.locations.types.Status;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.StatusSchedule;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +16,7 @@ import jakarta.validation.constraints.Size;
 import java.time.Instant;
 import java.util.List;
 
+@Accessors(chain = true)
 @Data
 public class EvsePatch {
     @Size(max = 36) String uid;

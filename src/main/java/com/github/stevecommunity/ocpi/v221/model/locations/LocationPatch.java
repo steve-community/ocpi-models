@@ -13,6 +13,7 @@ import com.github.stevecommunity.ocpi.v221.model.locations.types.PublishTokenTyp
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -20,6 +21,7 @@ import jakarta.validation.constraints.Size;
 import java.time.Instant;
 import java.util.List;
 
+@Accessors(chain = true)
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)

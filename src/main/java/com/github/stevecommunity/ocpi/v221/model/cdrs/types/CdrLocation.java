@@ -8,11 +8,13 @@ import com.github.stevecommunity.ocpi.v221.model.locations.types.PowerType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@Accessors(chain = true)
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)

@@ -1,10 +1,12 @@
 package com.github.stevecommunity.ocpi.v221.model;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+@Accessors(chain = true)
 @Data
 public class DisplayText {
     /**

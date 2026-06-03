@@ -6,6 +6,7 @@ import com.github.stevecommunity.ocpi.v221.model.cdrs.types.CdrToken;
 import com.github.stevecommunity.ocpi.v221.model.cdrs.types.ChargingPeriod;
 import com.github.stevecommunity.ocpi.v221.model.sessions.types.SessionStatus;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -13,6 +14,7 @@ import jakarta.validation.constraints.Size;
 import java.time.Instant;
 import java.util.List;
 
+@Accessors(chain = true)
 @Data
 public class SessionPatch {
     @Size(max = 2) String country_code;

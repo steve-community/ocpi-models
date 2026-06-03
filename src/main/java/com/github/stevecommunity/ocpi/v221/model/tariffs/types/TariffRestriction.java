@@ -1,6 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.model.tariffs.types;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import jakarta.validation.constraints.Pattern;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 import static com.github.stevecommunity.ocpi.v221.util.ValidationPatterns.DATE_YYYY_MM_DD;
 import static com.github.stevecommunity.ocpi.v221.util.ValidationPatterns.TIME_HHMM;
 
+@Accessors(chain = true)
 @Data
 public class TariffRestriction {
     @Pattern(regexp = TIME_HHMM) String start_time;

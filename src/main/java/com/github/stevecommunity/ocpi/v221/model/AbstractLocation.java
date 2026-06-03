@@ -2,10 +2,12 @@ package com.github.stevecommunity.ocpi.v221.model;
 
 import com.github.stevecommunity.ocpi.v221.model.locations.types.GeoLocation;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 
+@Accessors(chain = true)
 @Data
 public abstract class AbstractLocation {
     @Size(max = 36) String id;

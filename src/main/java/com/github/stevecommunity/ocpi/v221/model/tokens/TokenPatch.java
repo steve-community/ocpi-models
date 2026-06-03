@@ -5,12 +5,14 @@ import com.github.stevecommunity.ocpi.v221.model.tokens.types.EnergyContract;
 import com.github.stevecommunity.ocpi.v221.model.tokens.types.TokenType;
 import com.github.stevecommunity.ocpi.v221.model.tokens.types.WhitelistType;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.Instant;
 
+@Accessors(chain = true)
 @Data
 public class TokenPatch {
     @Size(max = 2) String country_code;

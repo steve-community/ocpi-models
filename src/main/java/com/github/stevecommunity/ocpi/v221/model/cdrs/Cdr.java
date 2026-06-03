@@ -8,6 +8,7 @@ import com.github.stevecommunity.ocpi.v221.model.cdrs.types.ChargingPeriod;
 import com.github.stevecommunity.ocpi.v221.model.cdrs.types.SignedData;
 import com.github.stevecommunity.ocpi.v221.model.tariffs.Tariff;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
@@ -16,6 +17,7 @@ import jakarta.validation.constraints.Size;
 import java.time.Instant;
 import java.util.List;
 
+@Accessors(chain = true)
 @Data
 public class Cdr {
     @NotEmpty @Size(max = 2) String country_code;

@@ -4,12 +4,14 @@ import com.github.stevecommunity.ocpi.v221.model.locations.types.ConnectorFormat
 import com.github.stevecommunity.ocpi.v221.model.locations.types.ConnectorType;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.PowerType;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.Instant;
 import java.util.List;
 
+@Accessors(chain = true)
 @Data
 public class ConnectorPatch {
     @Size(max = 36) String id;

@@ -4,11 +4,13 @@ import com.github.stevecommunity.ocpi.v221.model.DisplayText;
 import com.github.stevecommunity.ocpi.v221.model.tokens.types.AllowedType;
 import com.github.stevecommunity.ocpi.v221.model.tokens.types.LocationReferences;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@Accessors(chain = true)
 @Data
 public class AuthorizationInfo {
     @NotNull AllowedType allowed;
