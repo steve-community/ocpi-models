@@ -13,6 +13,12 @@ import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.HEADER_OCPI_FROM_COUNTRY;
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.HEADER_OCPI_FROM_PARTY_ID;
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.HEADER_OCPI_TO_COUNTRY;
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.HEADER_OCPI_TO_PARTY_ID;
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.HEADER_X_CORRELATION_ID;
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.HEADER_X_REQUEST_ID;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 public abstract class AbstractClient {
@@ -45,14 +51,14 @@ public abstract class AbstractClient {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set(AUTHORIZATION, authorizationToken);
 
-        addIfPresent(headers, "X-Request-ID", ocpiHeaders.getXRequestId());
-        addIfPresent(headers, "X-Correlation-ID", ocpiHeaders.getXCorrelationId());
+        addIfPresent(headers, HEADER_X_REQUEST_ID, ocpiHeaders.getXRequestId());
+        addIfPresent(headers, HEADER_X_CORRELATION_ID, ocpiHeaders.getXCorrelationId());
 
         if (ocpiHeaders instanceof OcpiRequestHeaders routingHeaders) {
-            addIfPresent(headers, "OCPI-from-country-code", routingHeaders.getFromCountryCode());
-            addIfPresent(headers, "OCPI-from-party-id", routingHeaders.getFromPartyId());
-            addIfPresent(headers, "OCPI-to-country-code", routingHeaders.getToCountryCode());
-            addIfPresent(headers, "OCPI-to-party-id", routingHeaders.getToPartyId());
+            addIfPresent(headers, HEADER_OCPI_FROM_COUNTRY, routingHeaders.getFromCountryCode());
+            addIfPresent(headers, HEADER_OCPI_FROM_PARTY_ID, routingHeaders.getFromPartyId());
+            addIfPresent(headers, HEADER_OCPI_TO_COUNTRY, routingHeaders.getToCountryCode());
+            addIfPresent(headers, HEADER_OCPI_TO_PARTY_ID, routingHeaders.getToPartyId());
         }
 
         return headers;

@@ -1,15 +1,12 @@
 package com.github.stevecommunity.ocpi.v221.web;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
+public class OcpiResponseVoid extends OcpiResponse<Void> {
 
-import jakarta.validation.constraints.NotNull;
-import java.time.Instant;
+    public OcpiResponseVoid() {
+        super(null);
+    }
 
-@Accessors(chain = true)
-@Data
-public class OcpiResponseVoid {
-    @NotNull StatusCode status_code;
-    String status_message;
-    @NotNull final Instant timestamp = Instant.now();
+    public static OcpiResponseVoid from() {
+        return new OcpiResponseVoid();
+    }
 }

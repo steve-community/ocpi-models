@@ -7,7 +7,6 @@ import com.github.stevecommunity.ocpi.v221.model.versions.types.VersionNumber;
 import static com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID.cdrs;
 import static com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID.chargingprofiles;
 import static com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID.commands;
-import static com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID.credentials;
 import static com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID.hubclientinfo;
 import static com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID.locations;
 import static com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID.sessions;
@@ -28,6 +27,13 @@ public interface OcpiApi {
     String SESSIONS_PATH          = "/ocpi/2.2.1/sessions";
     String TARIFFS_PATH           = "/ocpi/2.2.1/tariffs";
     String TOKENS_PATH            = "/ocpi/2.2.1/tokens";
+
+    String HEADER_X_REQUEST_ID        = "X-Request-ID";
+    String HEADER_X_CORRELATION_ID    = "X-Correlation-ID";
+    String HEADER_OCPI_FROM_COUNTRY   = "OCPI-from-country-code";
+    String HEADER_OCPI_FROM_PARTY_ID  = "OCPI-from-party-id";
+    String HEADER_OCPI_TO_COUNTRY     = "OCPI-to-country-code";
+    String HEADER_OCPI_TO_PARTY_ID    = "OCPI-to-party-id";
 
     InterfaceRole getRole();
     ModuleID getId();

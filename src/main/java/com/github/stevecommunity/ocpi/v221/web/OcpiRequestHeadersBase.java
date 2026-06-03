@@ -19,8 +19,8 @@ public class OcpiRequestHeadersBase {
      * To be used on server-side
      */
     public OcpiRequestHeadersBase(NativeWebRequest webRequest) {
-        xRequestId = webRequest.getHeader("X-Request-ID");
-        xCorrelationId = webRequest.getHeader("X-Correlation-ID");
+        xRequestId = webRequest.getHeader(OcpiApi.HEADER_X_REQUEST_ID);
+        xCorrelationId = webRequest.getHeader(OcpiApi.HEADER_X_CORRELATION_ID);
     }
 
     /**

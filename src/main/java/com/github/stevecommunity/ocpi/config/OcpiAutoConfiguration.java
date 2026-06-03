@@ -22,6 +22,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.CREDENTIALS_PATH;
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.HEADER_OCPI_FROM_COUNTRY;
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.HEADER_OCPI_FROM_PARTY_ID;
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.HEADER_OCPI_TO_COUNTRY;
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.HEADER_OCPI_TO_PARTY_ID;
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.HEADER_X_CORRELATION_ID;
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.HEADER_X_REQUEST_ID;
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.HUB_CLIENT_INFO_PATH;
+import static com.github.stevecommunity.ocpi.v221.web.OcpiApi.VERSIONS_PATH;
+
 @AutoConfiguration
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class OcpiAutoConfiguration {
@@ -29,9 +39,9 @@ public class OcpiAutoConfiguration {
     public static final String OCPI_AUTH_SCHEME = "ocpiAuth";
 
     private static final Set<String> NO_ROUTING_PATHS = Set.of(
-        "/ocpi/2.2.1/credentials",
-        "/ocpi/2.2.1/hubclientinfo",
-        "/ocpi/versions"
+        CREDENTIALS_PATH,
+        HUB_CLIENT_INFO_PATH,
+        VERSIONS_PATH
     );
 
     @Bean
@@ -113,17 +123,17 @@ public class OcpiAutoConfiguration {
     }
 
     private static void addOcpiHeadersNoRouting(Operation operation) {
-        operation.addParametersItem(header("X-Request-ID", true));
-        operation.addParametersItem(header("X-Correlation-ID", true));
+        operation.addParametersItem(header(HEADER_X_REQUEST_ID, true));
+        operation.addParametersItem(header(HEADER_X_CORRELATION_ID, true));
     }
 
     private static void addOcpiHeadersWithRouting(Operation operation) {
         addOcpiHeadersNoRouting(operation);
 
-        operation.addParametersItem(header("OCPI-from-country-code", false));
-        operation.addParametersItem(header("OCPI-from-party-id", false));
-        operation.addParametersItem(header("OCPI-to-country-code", false));
-        operation.addParametersItem(header("OCPI-to-party-id", false));
+        operation.addParametersItem(header(HEADER_OCPI_FROM_COUNTRY, false));
+        operation.addParametersItem(header(HEADER_OCPI_FROM_PARTY_ID, false));
+        operation.addParametersItem(header(HEADER_OCPI_TO_COUNTRY, false));
+        operation.addParametersItem(header(HEADER_OCPI_TO_PARTY_ID, false));
     }
 
     private static Parameter header(String name, boolean required) {

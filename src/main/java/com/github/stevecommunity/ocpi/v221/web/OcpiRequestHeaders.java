@@ -21,10 +21,10 @@ public class OcpiRequestHeaders extends OcpiRequestHeadersBase {
      */
     public OcpiRequestHeaders(NativeWebRequest webRequest) {
         super(webRequest);
-        fromCountryCode = webRequest.getHeader("OCPI-from-country-code");
-        fromPartyId = webRequest.getHeader("OCPI-from-party-id");
-        toCountryCode = webRequest.getHeader("OCPI-to-country-code");
-        toPartyId = webRequest.getHeader("OCPI-to-party-id");
+        fromCountryCode = webRequest.getHeader(OcpiApi.HEADER_OCPI_FROM_COUNTRY);
+        fromPartyId = webRequest.getHeader(OcpiApi.HEADER_OCPI_FROM_PARTY_ID);
+        toCountryCode = webRequest.getHeader(OcpiApi.HEADER_OCPI_TO_COUNTRY);
+        toPartyId = webRequest.getHeader(OcpiApi.HEADER_OCPI_TO_PARTY_ID);
     }
 
     /**
