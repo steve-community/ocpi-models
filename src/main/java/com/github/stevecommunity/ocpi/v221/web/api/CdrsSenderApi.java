@@ -20,7 +20,7 @@ import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_A
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
 @RequestMapping(value = OcpiApi.CDRS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
-public interface CdrsSenderApi extends OcpiApi.Sender.Cdrs {
+public interface CdrsSenderApi extends OcpiApi.Cdrs.Sender {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<List<Cdr>>> getCdrs(

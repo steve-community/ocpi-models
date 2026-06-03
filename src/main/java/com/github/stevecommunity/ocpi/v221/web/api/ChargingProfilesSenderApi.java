@@ -24,7 +24,7 @@ import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_A
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
 @RequestMapping(value = OcpiApi.CHARGING_PROFILES_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
-public interface ChargingProfilesSenderApi extends OcpiApi.Sender.ChargingProfiles {
+public interface ChargingProfilesSenderApi extends OcpiApi.ChargingProfiles.Sender {
 
     @PostMapping(value = "/response/active", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> postActiveChargingProfileResult(

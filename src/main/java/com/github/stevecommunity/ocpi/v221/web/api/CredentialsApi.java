@@ -22,7 +22,7 @@ import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_A
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
 @RequestMapping(value = OcpiApi.CREDENTIALS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
-public interface CredentialsApi {
+public interface CredentialsApi extends OcpiApi.Credentialz {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<Credentials>> getCredentials(

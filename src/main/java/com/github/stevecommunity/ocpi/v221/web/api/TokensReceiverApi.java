@@ -26,7 +26,7 @@ import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_A
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
 @RequestMapping(value = OcpiApi.TOKENS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
-public interface TokensReceiverApi extends OcpiApi.Receiver.Tokens {
+public interface TokensReceiverApi extends OcpiApi.Tokens.Receiver {
 
     @GetMapping("/{country_code}/{party_id}/{token_uid}")
     default ResponseEntity<OcpiResponse<Token>> getToken(

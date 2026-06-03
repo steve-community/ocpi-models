@@ -24,7 +24,7 @@ import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_A
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
 @RequestMapping(value = OcpiApi.SESSIONS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
-public interface SessionsReceiverApi extends OcpiApi.Receiver.Sessions {
+public interface SessionsReceiverApi extends OcpiApi.Sessions.Receiver {
 
     @GetMapping("/{country_code}/{party_id}/{session_id}")
     default ResponseEntity<OcpiResponse<Session>> getSession(

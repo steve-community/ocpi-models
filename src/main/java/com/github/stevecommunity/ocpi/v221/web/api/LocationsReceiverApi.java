@@ -28,7 +28,7 @@ import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_A
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
 @RequestMapping(value = OcpiApi.LOCATIONS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
-public interface LocationsReceiverApi extends OcpiApi.Receiver.Locations {
+public interface LocationsReceiverApi extends OcpiApi.Locations.Receiver {
 
     @GetMapping("/{country_code}/{party_id}/{location_id}")
     default ResponseEntity<OcpiResponse<Location>> getLocation(

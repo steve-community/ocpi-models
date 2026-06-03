@@ -20,7 +20,7 @@ import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_A
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
 @RequestMapping(value = OcpiApi.COMMANDS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
-public interface CommandsSenderApi extends OcpiApi.Sender.Commands {
+public interface CommandsSenderApi extends OcpiApi.Commands.Sender {
 
     @PostMapping(value = "/{command}", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponseVoid> postCommandResult(

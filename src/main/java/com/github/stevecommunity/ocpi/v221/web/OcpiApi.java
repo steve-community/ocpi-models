@@ -7,6 +7,7 @@ import com.github.stevecommunity.ocpi.v221.model.versions.types.VersionNumber;
 import static com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID.cdrs;
 import static com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID.chargingprofiles;
 import static com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID.commands;
+import static com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID.credentials;
 import static com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID.hubclientinfo;
 import static com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID.locations;
 import static com.github.stevecommunity.ocpi.v221.model.versions.types.ModuleID.sessions;
@@ -39,53 +40,73 @@ public interface OcpiApi {
     ModuleID getId();
     String getPath();
 
-    interface Receiver extends OcpiApi {
-
-        @Override
-        default InterfaceRole getRole() {
-            return InterfaceRole.RECEIVER;
-        }
-
-        interface Cdrs             extends Receiver { @Override default ModuleID getId() { return cdrs;                   }
-                                                      @Override default String getPath() { return CDRS_PATH;              } }
-        interface ChargingProfiles extends Receiver { @Override default ModuleID getId() { return chargingprofiles;       }
-                                                      @Override default String getPath() { return CHARGING_PROFILES_PATH; } }
-        interface Commands         extends Receiver { @Override default ModuleID getId() { return commands;               }
-                                                      @Override default String getPath() { return COMMANDS_PATH;          } }
-        interface HubClientInfo    extends Receiver { @Override default ModuleID getId() { return hubclientinfo;          }
-                                                      @Override default String getPath() { return HUB_CLIENT_INFO_PATH;   } }
-        interface Locations        extends Receiver { @Override default ModuleID getId() { return locations;              }
-                                                      @Override default String getPath() { return LOCATIONS_PATH;         } }
-        interface Sessions         extends Receiver { @Override default ModuleID getId() { return sessions;               }
-                                                      @Override default String getPath() { return SESSIONS_PATH;          } }
-        interface Tariffs          extends Receiver { @Override default ModuleID getId() { return tariffs;                }
-                                                      @Override default String getPath() { return TARIFFS_PATH;           } }
-        interface Tokens           extends Receiver { @Override default ModuleID getId() { return tokens;                 }
-                                                      @Override default String getPath() { return TOKENS_PATH;            } }
+    interface Sender extends OcpiApi {
+        @Override default InterfaceRole getRole() { return InterfaceRole.SENDER; }
     }
 
-    interface Sender extends OcpiApi {
+    interface Receiver extends OcpiApi {
+        @Override default InterfaceRole getRole() { return InterfaceRole.RECEIVER; }
+    }
 
-        @Override
-        default InterfaceRole getRole() {
-            return InterfaceRole.SENDER;
-        }
+    interface Credentialz extends OcpiApi {
+        @Override default InterfaceRole getRole() { return InterfaceRole.SENDER; }
+        @Override default ModuleID getId() { return credentials; }
+        @Override default String getPath() { return CREDENTIALS_PATH; }
+    }
 
-        interface Cdrs             extends Sender { @Override default ModuleID getId() { return cdrs;                   }
-                                                    @Override default String getPath() { return CDRS_PATH;              } }
-        interface ChargingProfiles extends Sender { @Override default ModuleID getId() { return chargingprofiles;       }
-                                                    @Override default String getPath() { return CHARGING_PROFILES_PATH; } }
-        interface Commands         extends Sender { @Override default ModuleID getId() { return commands;               }
-                                                    @Override default String getPath() { return COMMANDS_PATH;          } }
-        interface HubClientInfo    extends Sender { @Override default ModuleID getId() { return hubclientinfo;          }
-                                                    @Override default String getPath() { return HUB_CLIENT_INFO_PATH;   } }
-        interface Locations        extends Sender { @Override default ModuleID getId() { return locations;              }
-                                                    @Override default String getPath() { return LOCATIONS_PATH;         } }
-        interface Sessions         extends Sender { @Override default ModuleID getId() { return sessions;               }
-                                                    @Override default String getPath() { return SESSIONS_PATH;          } }
-        interface Tariffs          extends Sender { @Override default ModuleID getId() { return tariffs;                }
-                                                    @Override default String getPath() { return TARIFFS_PATH;           } }
-        interface Tokens           extends Sender { @Override default ModuleID getId() { return tokens;                 }
-                                                    @Override default String getPath() { return TOKENS_PATH;            } }
+    interface Cdrs extends OcpiApi {
+        @Override default ModuleID getId() { return cdrs; }
+        @Override default String getPath() { return CDRS_PATH; }
+        interface Sender extends Cdrs, OcpiApi.Sender { }
+        interface Receiver extends Cdrs, OcpiApi.Receiver { }
+    }
+
+    interface ChargingProfiles extends OcpiApi {
+        @Override default ModuleID getId() { return chargingprofiles; }
+        @Override default String getPath() { return CHARGING_PROFILES_PATH; }
+        interface Sender extends ChargingProfiles, OcpiApi.Sender { }
+        interface Receiver extends ChargingProfiles, OcpiApi.Receiver { }
+    }
+
+    interface Commands extends OcpiApi {
+        @Override default ModuleID getId() { return commands; }
+        @Override default String getPath() { return COMMANDS_PATH; }
+        interface Sender extends Commands, OcpiApi.Sender { }
+        interface Receiver extends Commands, OcpiApi.Receiver { }
+    }
+
+    interface HubClientInfo extends OcpiApi {
+        @Override default ModuleID getId() { return hubclientinfo; }
+        @Override default String getPath() { return HUB_CLIENT_INFO_PATH; }
+        interface Sender extends HubClientInfo, OcpiApi.Sender { }
+        interface Receiver extends HubClientInfo, OcpiApi.Receiver { }
+    }
+
+    interface Locations extends OcpiApi {
+        @Override default ModuleID getId() { return locations; }
+        @Override default String getPath() { return LOCATIONS_PATH; }
+        interface Sender extends Locations, OcpiApi.Sender { }
+        interface Receiver extends Locations, OcpiApi.Receiver { }
+    }
+
+    interface Sessions extends OcpiApi {
+        @Override default ModuleID getId() { return sessions; }
+        @Override default String getPath() { return SESSIONS_PATH; }
+        interface Sender extends Sessions, OcpiApi.Sender { }
+        interface Receiver extends Sessions, OcpiApi.Receiver { }
+    }
+
+    interface Tariffs extends OcpiApi {
+        @Override default ModuleID getId() { return tariffs; }
+        @Override default String getPath() { return TARIFFS_PATH; }
+        interface Sender extends Tariffs, OcpiApi.Sender { }
+        interface Receiver extends Tariffs, OcpiApi.Receiver { }
+    }
+
+    interface Tokens extends OcpiApi {
+        @Override default ModuleID getId() { return tokens; }
+        @Override default String getPath() { return TOKENS_PATH; }
+        interface Sender extends Tokens, OcpiApi.Sender { }
+        interface Receiver extends Tokens, OcpiApi.Receiver { }
     }
 }

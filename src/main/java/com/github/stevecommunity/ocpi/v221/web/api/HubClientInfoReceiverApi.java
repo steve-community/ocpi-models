@@ -22,7 +22,7 @@ import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_A
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
 @RequestMapping(value = OcpiApi.HUB_CLIENT_INFO_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
-public interface HubClientInfoReceiverApi extends OcpiApi.Receiver.HubClientInfo {
+public interface HubClientInfoReceiverApi extends OcpiApi.HubClientInfo.Receiver {
 
     @GetMapping("/{country_code}/{party_id}")
     default ResponseEntity<OcpiResponse<ClientInfo>> getClientInfo(

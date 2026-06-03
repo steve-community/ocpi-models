@@ -20,7 +20,7 @@ import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_A
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
 @RequestMapping(value = OcpiApi.TARIFFS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
-public interface TariffsSenderApi extends OcpiApi.Sender.Tariffs {
+public interface TariffsSenderApi extends OcpiApi.Tariffs.Sender {
 
     @GetMapping
     default ResponseEntity<OcpiResponse<List<Tariff>>> getTariffs(

@@ -23,7 +23,7 @@ import static com.github.stevecommunity.ocpi.config.OcpiAutoConfiguration.OCPI_A
 
 @SecurityRequirement(name = OCPI_AUTH_SCHEME)
 @RequestMapping(value = OcpiApi.COMMANDS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
-public interface CommandsReceiverApi extends OcpiApi.Receiver.Commands {
+public interface CommandsReceiverApi extends OcpiApi.Commands.Receiver {
 
     @PostMapping(value = "/CANCEL_RESERVATION", consumes = MediaType.APPLICATION_JSON_VALUE)
     default ResponseEntity<OcpiResponse<CommandResponse>> cancelReservation(
