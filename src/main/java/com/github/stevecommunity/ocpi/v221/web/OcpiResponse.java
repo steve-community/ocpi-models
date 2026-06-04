@@ -34,11 +34,6 @@ public class OcpiResponse<T> {
             .toOkResponse(headers);
     }
 
-    public static <T> ResponseEntity<OcpiResponse<T>> methodNotAllowed(OcpiRequestHeadersBase headers, String errorMsg) {
-        OcpiResponse<T> res = error(StatusCode.CLIENT_ERROR, errorMsg);
-        return res.toResponse(HttpStatus.METHOD_NOT_ALLOWED, headers);
-    }
-
     public ResponseEntity<OcpiResponse<T>> toOkResponse(OcpiRequestHeadersBase headers) {
         return toResponse(HttpStatus.OK, headers);
     }

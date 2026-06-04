@@ -33,12 +33,6 @@ public class OcpiResponseVoid {
             .toOkResponse(headers);
     }
 
-    public static ResponseEntity<OcpiResponseVoid> methodNotAllowed(OcpiRequestHeadersBase headers, String errorMsg) {
-        return OcpiResponseVoid
-            .error(StatusCode.CLIENT_ERROR, errorMsg)
-            .toResponse(HttpStatus.METHOD_NOT_ALLOWED, headers);
-    }
-
     public ResponseEntity<OcpiResponseVoid> toOkResponse(OcpiRequestHeadersBase headers) {
         return toResponse(HttpStatus.OK, headers);
     }
