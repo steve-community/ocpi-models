@@ -10,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 
@@ -95,9 +97,12 @@ public abstract class AbstractClient {
             throw new IllegalArgumentException("authorizationToken must not be blank");
         }
 
-        return authorizationToken.startsWith("Token ")
-            ? authorizationToken
-            : "Token " + authorizationToken;
+        String credentialsToken = authorizationToken.startsWith("Token ")
+            ? authorizationToken.substring("Token ".length())
+            : authorizationToken;
+
+        String encodedToken = Base64.getEncoder().encodeToString(credentialsToken.getBytes(StandardCharsets.UTF_8));
+        return "Token " + encodedToken;
     }
 
     protected URI uri(OcpiRequestParameters params) {
