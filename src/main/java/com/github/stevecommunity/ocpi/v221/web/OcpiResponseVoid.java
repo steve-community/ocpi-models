@@ -3,6 +3,7 @@ package com.github.stevecommunity.ocpi.v221.web;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import jakarta.validation.constraints.NotNull;
@@ -20,9 +21,31 @@ public class OcpiResponseVoid {
         return new OcpiResponseVoid();
     }
 
-    public ResponseEntity<OcpiResponseVoid> toResponse(OcpiRequestHeadersBase headers) {
+    public static OcpiResponseVoid error(StatusCode sc, String sm) {
+        return new OcpiResponseVoid()
+            .setStatus_code(sc)
+            .setStatus_message(sm);
+    }
+
+    public static ResponseEntity<OcpiResponseVoid> success(OcpiRequestHeadersBase headers) {
+        return from()
+            .setStatus_code(StatusCode.SUCCESS)
+            .toOkResponse(headers);
+    }
+
+    public static ResponseEntity<OcpiResponseVoid> methodNotAllowed(OcpiRequestHeadersBase headers, String errorMsg) {
+        return OcpiResponseVoid
+            .error(StatusCode.CLIENT_ERROR, errorMsg)
+            .toResponse(HttpStatus.METHOD_NOT_ALLOWED, headers);
+    }
+
+    public ResponseEntity<OcpiResponseVoid> toOkResponse(OcpiRequestHeadersBase headers) {
+        return toResponse(HttpStatus.OK, headers);
+    }
+
+    public ResponseEntity<OcpiResponseVoid> toResponse(HttpStatus status, OcpiRequestHeadersBase headers) {
         return ResponseEntity
-            .ok()
+            .status(status)
             .header(OcpiApi.HEADER_X_REQUEST_ID, headers.getXRequestId())
             .header(OcpiApi.HEADER_X_CORRELATION_ID, headers.getXCorrelationId())
             .body(this);

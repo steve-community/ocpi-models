@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import jakarta.validation.constraints.NotEmpty;
+import java.util.UUID;
 
 @Getter
 @ToString
@@ -30,6 +31,13 @@ public class OcpiRequestHeadersBase {
     public OcpiRequestHeadersBase(String xRequestId, String xCorrelationId) {
         this.xRequestId = requireNonEmpty(xRequestId, "xRequestId must not be null/empty");
         this.xCorrelationId = requireNonEmpty(xCorrelationId, "xCorrelationId must not be null/empty");
+    }
+
+    public static OcpiRequestHeadersBase random() {
+        return new OcpiRequestHeadersBase(
+            UUID.randomUUID().toString(),
+            UUID.randomUUID().toString()
+        );
     }
 
     private static String requireNonEmpty(String obj, String message) {

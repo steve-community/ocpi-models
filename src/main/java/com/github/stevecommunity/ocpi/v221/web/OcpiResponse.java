@@ -3,6 +3,7 @@ package com.github.stevecommunity.ocpi.v221.web;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import jakarta.validation.constraints.NotNull;
@@ -21,9 +22,30 @@ public class OcpiResponse<T> {
         return new OcpiResponse<>(data);
     }
 
-    public ResponseEntity<OcpiResponse<T>> toResponse(OcpiRequestHeadersBase headers) {
+    public static <T> OcpiResponse<T> error(StatusCode sc, String sm) {
+        return new OcpiResponse<T>(null)
+            .setStatus_code(sc)
+            .setStatus_message(sm);
+    }
+
+    public static <T> ResponseEntity<OcpiResponse<T>> success(T data, OcpiRequestHeadersBase headers) {
+        return from(data)
+            .setStatus_code(StatusCode.SUCCESS)
+            .toOkResponse(headers);
+    }
+
+    public static <T> ResponseEntity<OcpiResponse<T>> methodNotAllowed(OcpiRequestHeadersBase headers, String errorMsg) {
+        OcpiResponse<T> res = error(StatusCode.CLIENT_ERROR, errorMsg);
+        return res.toResponse(HttpStatus.METHOD_NOT_ALLOWED, headers);
+    }
+
+    public ResponseEntity<OcpiResponse<T>> toOkResponse(OcpiRequestHeadersBase headers) {
+        return toResponse(HttpStatus.OK, headers);
+    }
+
+    public ResponseEntity<OcpiResponse<T>> toResponse(HttpStatus status, OcpiRequestHeadersBase headers) {
         return ResponseEntity
-            .ok()
+            .status(status)
             .header(OcpiApi.HEADER_X_REQUEST_ID, headers.getXRequestId())
             .header(OcpiApi.HEADER_X_CORRELATION_ID, headers.getXCorrelationId())
             .body(this);
