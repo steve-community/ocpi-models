@@ -125,29 +125,21 @@ API interfaces can be found in package `com.github.stevecommunity.ocpi.v221.web.
 
 ### API clients
 
-The same API contracts can also be used from the client side.
-Client classes wrap `RestTemplate`, OCPI authorization, OCPI request headers, and pagination/query plumbing.
-Each client expects the full module endpoint root discovered through OCPI versions/version-details, not just the remote system root.
+The client side uses one compact `OcpiClient` around `RestTemplate`.
+It wraps OCPI authorization, request/correlation ID generation, routing headers, response unwrapping, and pagination/query plumbing.
+Client methods expect the full module endpoint root discovered through OCPI versions/version-details, not just the remote system root.
+Callback-style methods that receive a URL from the remote party expect that complete URL directly.
 
 ```java
 RestTemplate restTemplate = new RestTemplate();
 
-CdrsClient cdrsClient = new CdrsClient(
-    restTemplate,
-    "https://cpo.example.com/ocpi/2.2.1/cdrs",
-    "my-ocpi-token"
-);
-
-OcpiRequestHeaders headers = OcpiRequestHeaders.builder()
-    .xRequestId(UUID.randomUUID().toString())
-    .xCorrelationId(UUID.randomUUID().toString())
-    .fromCountryCode("DE")
-    .fromPartyId("MSP")
-    .toCountryCode("DE")
-    .toPartyId("CPO")
+OcpiClient client = OcpiClientBuilder
+    .create(restTemplate, "my-ocpi-token")
+    .from("DE", "MSP")
+    .to("DE", "CPO")
     .build();
 
-ResponseEntity<OcpiResponse<Cdr>> response = cdrsClient.getCdr(headers, "cdr-123");
+Cdr cdr = client.getCdr("https://cpo.example.com/ocpi/2.2.1/cdrs", "cdr-123");
 ```
 
 Client classes can be found in package `com.github.stevecommunity.ocpi.v221.web.client`.

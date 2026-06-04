@@ -1,6 +1,5 @@
 package com.github.stevecommunity.ocpi.v221.web;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -16,33 +15,11 @@ public class OcpiRequestHeaders extends OcpiRequestHeadersBase {
     @Size(min = 2, max = 2) String toCountryCode;
     @Size(min = 3, max = 3) String toPartyId;
 
-    /**
-     * To be used on server-side
-     */
     public OcpiRequestHeaders(NativeWebRequest webRequest) {
         super(webRequest);
         fromCountryCode = webRequest.getHeader(OcpiApi.HEADER_OCPI_FROM_COUNTRY);
         fromPartyId = webRequest.getHeader(OcpiApi.HEADER_OCPI_FROM_PARTY_ID);
         toCountryCode = webRequest.getHeader(OcpiApi.HEADER_OCPI_TO_COUNTRY);
         toPartyId = webRequest.getHeader(OcpiApi.HEADER_OCPI_TO_PARTY_ID);
-    }
-
-    /**
-     * Can be used by clients
-     */
-    @Builder
-    public OcpiRequestHeaders(
-        String xRequestId,
-        String xCorrelationId,
-        String fromCountryCode,
-        String fromPartyId,
-        String toCountryCode,
-        String toPartyId
-    ) {
-        super(xRequestId, xCorrelationId);
-        this.fromCountryCode = fromCountryCode;
-        this.fromPartyId = fromPartyId;
-        this.toCountryCode = toCountryCode;
-        this.toPartyId = toPartyId;
     }
 }
