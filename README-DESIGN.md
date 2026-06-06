@@ -124,10 +124,14 @@ Controller implementations can then work with one compact object instead of a lo
 @Setter
 @ToString
 public class OcpiRequestParameters {
+    
+    public static final int DEFAULT_LIMIT = 50;
+    public static final int MAX_LIMIT = 200;
+    
     Instant date_from;
     Instant date_to;
     @Min(value = 0) Integer offset = 0;
-    @Min(value = 0) Integer limit;
+    @Min(value = 0) Integer limit = DEFAULT_LIMIT;
 }
 ```
 
@@ -139,6 +143,7 @@ API interfaces receive this object as a method parameter:
 
 `@ParameterObject` lets OpenAPI discover the fields as HTTP request parameters even though Java code sees a single object.
 `@Valid` activates Jakarta/Hibernate validation for the pagination object.
+`getLimit()` returns the effective page size: missing limits use `DEFAULT_LIMIT`, and requested limits above `MAX_LIMIT` are capped.
 
 ---
 
@@ -168,7 +173,7 @@ default ResponseEntity<OcpiResponse<List<Cdr>>> getCdrs(
     @RequestParam(value = "date_from", required = false) Instant dateFrom,
     @RequestParam(value = "date_to", required = false) Instant dateTo,
     @RequestParam(value = "offset", required = false, defaultValue = "0") Integer offset,
-    @RequestParam(value = "limit", required = false) Integer limit
+    @RequestParam(value = "limit", required = false, defaultValue = "50") Integer limit
 ) {
     // ...
 }

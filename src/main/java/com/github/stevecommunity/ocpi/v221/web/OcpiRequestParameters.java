@@ -11,8 +11,20 @@ import java.time.Instant;
 @Setter
 @ToString
 public class OcpiRequestParameters {
+
+    public static final int DEFAULT_LIMIT = 50;
+    public static final int MAX_LIMIT = 200;
+
     Instant date_from;
     Instant date_to;
     @Min(value = 0) Integer offset = 0;
-    @Min(value = 0) Integer limit;
+    @Min(value = 0) Integer limit = DEFAULT_LIMIT;
+
+    public Integer getLimit() {
+        if (limit == null) {
+            return DEFAULT_LIMIT;
+        }
+
+        return Math.min(limit, MAX_LIMIT);
+    }
 }
