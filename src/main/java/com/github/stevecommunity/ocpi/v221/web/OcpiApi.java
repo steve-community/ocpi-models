@@ -36,6 +36,10 @@ public interface OcpiApi {
     String HEADER_OCPI_TO_COUNTRY     = "OCPI-to-country-code";
     String HEADER_OCPI_TO_PARTY_ID    = "OCPI-to-party-id";
 
+    String HEADER_RESPONSE_LINK        = "Link";
+    String HEADER_RESPONSE_TOTAL_COUNT = "X-Total-Count";
+    String HEADER_RESPONSE_LIMIT       = "X-Limit";
+
     InterfaceRole getRole();
     ModuleID getId();
     String getPath();

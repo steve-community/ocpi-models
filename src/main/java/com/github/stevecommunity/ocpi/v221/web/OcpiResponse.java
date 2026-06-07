@@ -29,9 +29,14 @@ public class OcpiResponse<T> {
     }
 
     public static <T> ResponseEntity<OcpiResponse<T>> success(T data, OcpiRequestHeadersBase headers) {
+        return success(data, headers, null);
+    }
+
+    public static <T> ResponseEntity<OcpiResponse<T>> success(T data, OcpiRequestHeadersBase headers,
+                                                              OcpiResponsePaginationHeaders paginationHeaders) {
         return from(data)
             .setStatus_code(StatusCode.SUCCESS)
-            .toOkResponse(headers);
+            .toResponse(HttpStatus.OK, headers, paginationHeaders);
     }
 
     public ResponseEntity<OcpiResponse<T>> toOkResponse(OcpiRequestHeadersBase headers) {
@@ -39,10 +44,28 @@ public class OcpiResponse<T> {
     }
 
     public ResponseEntity<OcpiResponse<T>> toResponse(HttpStatus status, OcpiRequestHeadersBase headers) {
-        return ResponseEntity
+        return toResponse(status, headers, null);
+    }
+
+    public ResponseEntity<OcpiResponse<T>> toResponse(HttpStatus status, OcpiRequestHeadersBase headers,
+                                                      OcpiResponsePaginationHeaders paginationHeaders) {
+        var builder = ResponseEntity
             .status(status)
             .header(OcpiApi.HEADER_X_REQUEST_ID, headers.getXRequestId())
-            .header(OcpiApi.HEADER_X_CORRELATION_ID, headers.getXCorrelationId())
-            .body(this);
+            .header(OcpiApi.HEADER_X_CORRELATION_ID, headers.getXCorrelationId());
+
+        if (paginationHeaders != null) {
+            addIfPresent(builder, OcpiApi.HEADER_RESPONSE_LINK, paginationHeaders.getLink());
+            addIfPresent(builder, OcpiApi.HEADER_RESPONSE_TOTAL_COUNT, paginationHeaders.getTotalCount());
+            addIfPresent(builder, OcpiApi.HEADER_RESPONSE_LIMIT, paginationHeaders.getLimit());
+        }
+
+        return builder.body(this);
+    }
+
+    private static void addIfPresent(ResponseEntity.BodyBuilder builder, String name, Object value) {
+        if (value != null) {
+            builder.header(name, value.toString());
+        }
     }
 }
