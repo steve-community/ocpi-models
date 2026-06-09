@@ -163,15 +163,15 @@ public class OcpiClient {
         put(completeUrl, activeChargingProfile);
     }
 
-    public void postActiveChargingProfileResult(String completeUrl, ActiveChargingProfileResult result) {
+    public void sendResult(String completeUrl, ActiveChargingProfileResult result) {
         post(completeUrl, result);
     }
 
-    public void postChargingProfileResult(String completeUrl, ChargingProfileResult result) {
+    public void sendResult(String completeUrl, ChargingProfileResult result) {
         post(completeUrl, result);
     }
 
-    public void postClearProfileResult(String completeUrl, ClearProfileResult result) {
+    public void sendResult(String completeUrl, ClearProfileResult result) {
         post(completeUrl, result);
     }
 
@@ -204,7 +204,7 @@ public class OcpiClient {
         return post(completeUrl, command, COMMAND_RESPONSE);
     }
 
-    public void postCommandResult(String completeUrl, CommandResult result) {
+    public void sendResult(String completeUrl, CommandResult result) {
         post(completeUrl, result);
     }
 
