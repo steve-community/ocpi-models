@@ -41,6 +41,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -129,8 +130,9 @@ public class OcpiClient {
         return get(completeUrl, CDR_RESPONSE);
     }
 
-    public void postCdr(String url, Cdr cdr) {
-        post(url, cdr);
+    public String postCdr(String url, Cdr cdr) {
+        var response = post(url, cdr);
+        return response.getHeaders().getFirst(HttpHeaders.LOCATION);
     }
 
     // -------------------------------------------------------------------------
@@ -469,8 +471,8 @@ public class OcpiClient {
         ).getBody().getData();
     }
 
-    public void post(String url, Object payload) {
-        restTemplate.exchange(
+    public ResponseEntity<OcpiResponseVoid> post(String url, Object payload) {
+        return restTemplate.exchange(
             url,
             HttpMethod.POST,
             new HttpEntity<>(payload, httpHeaders()),
@@ -478,8 +480,8 @@ public class OcpiClient {
         );
     }
 
-    public void put(String url, Object payload) {
-        restTemplate.exchange(
+    public ResponseEntity<OcpiResponseVoid> put(String url, Object payload) {
+        return restTemplate.exchange(
             url,
             HttpMethod.PUT,
             new HttpEntity<>(payload, httpHeaders()),
@@ -487,8 +489,8 @@ public class OcpiClient {
         );
     }
 
-    public void patch(String url, Object payload) {
-        restTemplate.exchange(
+    public ResponseEntity<OcpiResponseVoid> patch(String url, Object payload) {
+        return restTemplate.exchange(
             url,
             HttpMethod.PATCH,
             new HttpEntity<>(payload, httpHeaders()),
@@ -496,8 +498,8 @@ public class OcpiClient {
         );
     }
 
-    public void delete(String url) {
-        restTemplate.exchange(
+    public ResponseEntity<OcpiResponseVoid> delete(String url) {
+        return restTemplate.exchange(
             url,
             HttpMethod.DELETE,
             new HttpEntity<>(httpHeaders()),
