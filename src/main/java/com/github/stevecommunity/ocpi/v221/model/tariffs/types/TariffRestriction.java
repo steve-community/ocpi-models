@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import jakarta.validation.constraints.Pattern;
+import java.time.DayOfWeek;
 import java.util.List;
 
 import static com.github.stevecommunity.ocpi.v221.util.ValidationPatterns.DATE_YYYY_MM_DD;
