@@ -12,7 +12,7 @@ import java.time.Instant;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Accessors(chain = true)
 @Data
-public class OcpiResponseVoid {
+public class OcpiResponseVoid implements OcpiResponseEnvelope {
     @NotNull StatusCode status_code;
     String status_message;
     @NotNull final Instant timestamp = Instant.now();

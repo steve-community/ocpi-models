@@ -12,7 +12,7 @@ import java.time.Instant;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Accessors(chain = true)
 @Data
-public class OcpiResponse<T> {
+public class OcpiResponse<T> implements OcpiResponseEnvelope {
     final T data;
     @NotNull StatusCode status_code;
     String status_message;

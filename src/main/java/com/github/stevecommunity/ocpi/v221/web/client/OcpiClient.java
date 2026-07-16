@@ -36,7 +36,9 @@ import com.github.stevecommunity.ocpi.v221.model.versions.Version;
 import com.github.stevecommunity.ocpi.v221.model.versions.VersionDetails;
 import com.github.stevecommunity.ocpi.v221.web.OcpiRequestParameters;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponse;
+import com.github.stevecommunity.ocpi.v221.web.OcpiResponseEnvelope;
 import com.github.stevecommunity.ocpi.v221.web.OcpiResponseVoid;
+import com.github.stevecommunity.ocpi.v221.web.StatusCode;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -73,6 +75,12 @@ import static com.github.stevecommunity.ocpi.v221.web.client.Constants.TOKEN_RES
 import static com.github.stevecommunity.ocpi.v221.web.client.Constants.VERSIONS_RESPONSE;
 import static com.github.stevecommunity.ocpi.v221.web.client.Constants.VERSION_DETAILS_RESPONSE;
 
+/**
+ * Client for OCPI requests.
+ * <p>
+ * Every response is validated at the OCPI protocol level. A response with a non-successful
+ * OCPI {@code status_code} throws {@link OcpiResponseException}, even when its HTTP status is successful.
+ */
 public class OcpiClient {
 
     private final RestTemplate restTemplate;
@@ -431,85 +439,111 @@ public class OcpiClient {
 
     public <INNER, OUTER extends OcpiResponse<INNER>> INNER get(String url,
                                                                 ParameterizedTypeReference<OUTER> responseType) {
-        return restTemplate.exchange(
+        var response = restTemplate.exchange(
             url,
             HttpMethod.GET,
             new HttpEntity<>(httpHeaders()),
             responseType
-        ).getBody().getData();
+        );
+        return data(response);
     }
 
     public <INNER, OUTER extends OcpiResponse<INNER>> INNER post(String url,
                                                                  Object payload,
                                                                  ParameterizedTypeReference<OUTER> responseType) {
-        return restTemplate.exchange(
+        var response = restTemplate.exchange(
             url,
             HttpMethod.POST,
             new HttpEntity<>(payload, httpHeaders()),
             responseType
-        ).getBody().getData();
+        );
+        return data(response);
     }
 
     public <INNER, OUTER extends OcpiResponse<INNER>> INNER put(String url,
                                                                 Object payload,
                                                                 ParameterizedTypeReference<OUTER> responseType) {
-        return restTemplate.exchange(
+        var response = restTemplate.exchange(
             url,
             HttpMethod.PUT,
             new HttpEntity<>(payload, httpHeaders()),
             responseType
-        ).getBody().getData();
+        );
+        return data(response);
     }
 
     public <INNER, OUTER extends OcpiResponse<INNER>> INNER delete(String url,
                                                                    ParameterizedTypeReference<OUTER> responseType) {
-        return restTemplate.exchange(
+        var response = restTemplate.exchange(
             url,
             HttpMethod.DELETE,
             new HttpEntity<>(httpHeaders()),
             responseType
-        ).getBody().getData();
+        );
+        return data(response);
     }
 
     public ResponseEntity<OcpiResponseVoid> post(String url, Object payload) {
-        return restTemplate.exchange(
+        var response = restTemplate.exchange(
             url,
             HttpMethod.POST,
             new HttpEntity<>(payload, httpHeaders()),
             OcpiResponseVoid.class
         );
+        return validate(response);
     }
 
     public ResponseEntity<OcpiResponseVoid> put(String url, Object payload) {
-        return restTemplate.exchange(
+        var response = restTemplate.exchange(
             url,
             HttpMethod.PUT,
             new HttpEntity<>(payload, httpHeaders()),
             OcpiResponseVoid.class
         );
+        return validate(response);
     }
 
     public ResponseEntity<OcpiResponseVoid> patch(String url, Object payload) {
-        return restTemplate.exchange(
+        var response = restTemplate.exchange(
             url,
             HttpMethod.PATCH,
             new HttpEntity<>(payload, httpHeaders()),
             OcpiResponseVoid.class
         );
+        return validate(response);
     }
 
     public ResponseEntity<OcpiResponseVoid> delete(String url) {
-        return restTemplate.exchange(
+        var response = restTemplate.exchange(
             url,
             HttpMethod.DELETE,
             new HttpEntity<>(httpHeaders()),
             OcpiResponseVoid.class
         );
+        return validate(response);
     }
 
     // -------------------------------------------------------------------------
     // Private helpers
     // -------------------------------------------------------------------------
+
+    private static <INNER, OUTER extends OcpiResponse<INNER>> INNER data(ResponseEntity<OUTER> response) {
+        return validate(response).getBody().getData();
+    }
+
+    private static <OUTER extends OcpiResponseEnvelope> ResponseEntity<OUTER> validate(ResponseEntity<OUTER> response) {
+        OUTER body = response.getBody();
+        if (body == null) {
+            throw new IllegalStateException("OCPI response body is missing");
+        }
+        if (body.getStatus_code() == null) {
+            throw new IllegalStateException("OCPI response status_code is missing");
+        }
+        if (body.getStatus_code() != StatusCode.SUCCESS) {
+            throw new OcpiResponseException(body.getStatus_code(), body.getStatus_message());
+        }
+        return response;
+    }
 
     private HttpHeaders httpHeaders() {
         // Copy the static template because request and default correlation IDs are per exchange.
