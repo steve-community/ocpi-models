@@ -451,6 +451,7 @@ public class OcpiClient {
     public <INNER, OUTER extends OcpiResponse<INNER>> INNER post(String url,
                                                                  Object payload,
                                                                  ParameterizedTypeReference<OUTER> responseType) {
+        checkBeforeSend(payload);
         var response = restTemplate.exchange(
             url,
             HttpMethod.POST,
@@ -463,6 +464,7 @@ public class OcpiClient {
     public <INNER, OUTER extends OcpiResponse<INNER>> INNER put(String url,
                                                                 Object payload,
                                                                 ParameterizedTypeReference<OUTER> responseType) {
+        checkBeforeSend(payload);
         var response = restTemplate.exchange(
             url,
             HttpMethod.PUT,
@@ -484,6 +486,7 @@ public class OcpiClient {
     }
 
     public ResponseEntity<OcpiResponseVoid> post(String url, Object payload) {
+        checkBeforeSend(payload);
         var response = restTemplate.exchange(
             url,
             HttpMethod.POST,
@@ -494,6 +497,7 @@ public class OcpiClient {
     }
 
     public ResponseEntity<OcpiResponseVoid> put(String url, Object payload) {
+        checkBeforeSend(payload);
         var response = restTemplate.exchange(
             url,
             HttpMethod.PUT,
@@ -504,6 +508,7 @@ public class OcpiClient {
     }
 
     public ResponseEntity<OcpiResponseVoid> patch(String url, Object payload) {
+        checkBeforeSend(payload);
         var response = restTemplate.exchange(
             url,
             HttpMethod.PATCH,
@@ -523,15 +528,29 @@ public class OcpiClient {
         return validate(response);
     }
 
+    /**
+     * Extension point invoked immediately before an outgoing payload is sent.
+     * The base client intentionally performs no checks.
+     */
+    protected void checkBeforeSend(Object payload) {
+    }
+
+    /**
+     * Extension point invoked after a successful OCPI response has been validated at the protocol level.
+     * The base client intentionally performs no checks.
+     */
+    protected void checkAfterReceive(OcpiResponseEnvelope response) {
+    }
+
     // -------------------------------------------------------------------------
     // Private helpers
     // -------------------------------------------------------------------------
 
-    private static <INNER, OUTER extends OcpiResponse<INNER>> INNER data(ResponseEntity<OUTER> response) {
+    private <INNER, OUTER extends OcpiResponse<INNER>> INNER data(ResponseEntity<OUTER> response) {
         return validate(response).getBody().getData();
     }
 
-    private static <OUTER extends OcpiResponseEnvelope> ResponseEntity<OUTER> validate(ResponseEntity<OUTER> response) {
+    private <OUTER extends OcpiResponseEnvelope> ResponseEntity<OUTER> validate(ResponseEntity<OUTER> response) {
         OUTER body = response.getBody();
         if (body == null) {
             throw new IllegalStateException("OCPI response body is missing");
@@ -542,6 +561,7 @@ public class OcpiClient {
         if (body.getStatus_code() != StatusCode.SUCCESS) {
             throw new OcpiResponseException(body.getStatus_code(), body.getStatus_message());
         }
+        checkAfterReceive(body);
         return response;
     }
 

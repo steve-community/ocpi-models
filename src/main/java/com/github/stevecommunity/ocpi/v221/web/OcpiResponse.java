@@ -6,6 +6,7 @@ import lombok.experimental.Accessors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.time.Instant;
 
@@ -13,7 +14,7 @@ import java.time.Instant;
 @Accessors(chain = true)
 @Data
 public class OcpiResponse<T> implements OcpiResponseEnvelope {
-    final T data;
+    @Valid final T data;
     @NotNull StatusCode status_code;
     String status_message;
     @NotNull final Instant timestamp = Instant.now();
