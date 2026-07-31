@@ -17,4 +17,9 @@ public class OcpiRequestHeadersBase {
         xRequestId = webRequest.getHeader(OcpiApi.HEADER_X_REQUEST_ID);
         xCorrelationId = webRequest.getHeader(OcpiApi.HEADER_X_CORRELATION_ID);
     }
+
+    OcpiRequestHeadersBase(String xRequestId, String xCorrelationId) {
+        this.xRequestId = xRequestId;
+        this.xCorrelationId = xCorrelationId;
+    }
 }
