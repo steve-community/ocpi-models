@@ -1,5 +1,6 @@
 package com.github.stevecommunity.ocpi.v221.model.locations;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.github.stevecommunity.ocpi.v221.model.DisplayText;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.Capability;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.GeoLocation;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Accessors(chain = true)
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class EvsePatch {
     @Size(max = 36) String uid;
     @Size(max = 48) String evse_id;

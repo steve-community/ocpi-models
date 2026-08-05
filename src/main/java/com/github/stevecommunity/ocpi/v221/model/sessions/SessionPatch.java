@@ -1,5 +1,6 @@
 package com.github.stevecommunity.ocpi.v221.model.sessions;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.github.stevecommunity.ocpi.v221.model.Price;
 import com.github.stevecommunity.ocpi.v221.model.cdrs.types.AuthMethod;
 import com.github.stevecommunity.ocpi.v221.model.cdrs.types.CdrToken;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Accessors(chain = true)
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SessionPatch {
     @Size(max = 2) String country_code;
     @Size(max = 3) String party_id;

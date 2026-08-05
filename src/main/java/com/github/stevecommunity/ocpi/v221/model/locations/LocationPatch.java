@@ -1,5 +1,6 @@
 package com.github.stevecommunity.ocpi.v221.model.locations;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.github.stevecommunity.ocpi.v221.model.AbstractLocation;
 import com.github.stevecommunity.ocpi.v221.model.DisplayText;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.AdditionalGeoLocation;
@@ -25,6 +26,7 @@ import java.util.List;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class LocationPatch extends AbstractLocation {
     @Size(max = 2) String country_code;
     @Size(max = 3) String party_id;

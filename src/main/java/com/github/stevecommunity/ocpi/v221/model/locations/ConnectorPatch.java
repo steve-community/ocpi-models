@@ -1,5 +1,6 @@
 package com.github.stevecommunity.ocpi.v221.model.locations;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.ConnectorFormat;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.ConnectorType;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.PowerType;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Accessors(chain = true)
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ConnectorPatch {
     @Size(max = 36) String id;
     ConnectorType standard;

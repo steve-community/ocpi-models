@@ -1,5 +1,6 @@
 package com.github.stevecommunity.ocpi.v221.model.tokens;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.PublishTokenType;
 import com.github.stevecommunity.ocpi.v221.model.sessions.types.ProfileType;
 import com.github.stevecommunity.ocpi.v221.model.tokens.types.EnergyContract;
@@ -19,6 +20,7 @@ import java.time.Instant;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TokenPatch extends PublishTokenType {
     @Size(max = 2) String country_code;
     @Size(max = 3) String party_id;
