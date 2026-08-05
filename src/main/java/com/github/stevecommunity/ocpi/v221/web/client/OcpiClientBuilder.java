@@ -4,6 +4,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
@@ -71,6 +73,18 @@ public class OcpiClientBuilder {
 
     public OcpiClient build() {
         return new OcpiClient(this.restTemplate, this.headers);
+    }
+
+    public OcpiClient build(Validator validator, ValidationStrictnessMode readingMode, ValidationStrictnessMode writingMode) {
+        if (readingMode == null && writingMode == null) {
+            throw new NullPointerException("readingMode and writingMode are null");
+        }
+
+        Validator validatorToUse = validator == null
+            ? Validation.buildDefaultValidatorFactory().getValidator()
+            : validator;
+
+        return new OcpiClientWithValidation(this.restTemplate, this.headers, validatorToUse, readingMode, writingMode);
     }
 
     private static void addIfPresent(HttpHeaders headers, String name, String value) {
