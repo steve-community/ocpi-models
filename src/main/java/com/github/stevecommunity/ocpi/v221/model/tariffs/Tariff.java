@@ -23,11 +23,11 @@ public class Tariff {
     @NotEmpty @Size(max = 36) String id;
     @NotEmpty @Size(max = 3) String currency;
     TariffType type;
-    @Valid List<DisplayText> tariff_alt_text;
+    List<@Valid DisplayText> tariff_alt_text;
     @Size(max = 255) String tariff_alt_url;
     @Valid Price min_price;
     @Valid Price max_price;
-    @NotEmpty @Valid List<TariffElement> elements;
+    @NotEmpty List<@Valid TariffElement> elements;
     Instant start_date_time;
     Instant end_date_time;
     @Valid EnergyMix energy_mix;

@@ -12,8 +12,8 @@ import java.util.List;
 @Data
 public class EnergyMix {
     @NotNull Boolean is_green_energy;
-    @Valid List<EnergySource> energy_sources;
-    @Valid List<EnvironmentalImpact> environ_impact;
+    List<@Valid EnergySource> energy_sources;
+    List<@Valid EnvironmentalImpact> environ_impact;
     @Size(max = 64) String supplier_name;
     @Size(max = 64) String energy_product_name;
 }

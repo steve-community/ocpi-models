@@ -14,6 +14,6 @@ import java.util.List;
 @Data
 public class ChargingPeriod {
     @NotNull Instant start_date_time;
-    @NotEmpty @Valid List<CdrDimension> dimensions;
+    @NotEmpty List<@Valid CdrDimension> dimensions;
     @Size(max = 36) String tariff_id;
 }

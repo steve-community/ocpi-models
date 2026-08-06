@@ -10,6 +10,6 @@ import java.util.List;
 @Accessors(chain = true)
 @Data
 public class TariffElement {
-    @NotEmpty @Valid List<PriceComponent> price_components;
+    @NotEmpty List<@Valid PriceComponent> price_components;
     @Valid TariffRestriction restrictions;
 }

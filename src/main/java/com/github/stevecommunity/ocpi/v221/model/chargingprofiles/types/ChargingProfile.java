@@ -15,5 +15,5 @@ public class ChargingProfile {
     Integer duration;
     @NotNull ChargingRateUnit charging_rate_unit;
     Double min_charging_rate;
-    @Valid List<ChargingProfilePeriod> charging_profile_period;
+    List<@Valid ChargingProfilePeriod> charging_profile_period;
 }

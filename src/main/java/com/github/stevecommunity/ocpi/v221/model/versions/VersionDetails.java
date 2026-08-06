@@ -14,5 +14,5 @@ import java.util.List;
 @Data
 public class VersionDetails {
     @NotNull VersionNumber version;
-    @NotEmpty @Valid List<Endpoint> endpoints;
+    @NotEmpty List<@Valid Endpoint> endpoints;
 }

@@ -31,11 +31,11 @@ public class LocationPatch extends AbstractLocation {
     @Size(max = 2) String country_code;
     @Size(max = 3) String party_id;
     Boolean publish;
-    @Valid List<PublishTokenType> publish_allowed_to;
-    @Valid List<AdditionalGeoLocation> related_locations;
+    List<@Valid PublishTokenType> publish_allowed_to;
+    List<@Valid AdditionalGeoLocation> related_locations;
     ParkingType parking_type;
-    @Valid List<Evse> evses;
-    @Valid List<DisplayText> directions;
+    List<@Valid Evse> evses;
+    List<@Valid DisplayText> directions;
     @Valid BusinessDetails operator;
     @Valid BusinessDetails suboperator;
     @Valid BusinessDetails owner;
@@ -43,7 +43,7 @@ public class LocationPatch extends AbstractLocation {
     @Size(max = 255) String time_zone;
     @Valid Hours opening_times;
     Boolean charging_when_closed;
-    @Valid List<Image> images;
+    List<@Valid Image> images;
     @Valid EnergyMix energy_mix;
     @NotNull Instant last_updated;
 }

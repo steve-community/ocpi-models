@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class Hours {
     @NotNull Boolean twentyfourseven;
-    @Valid List<RegularHours> regular_hours;
-    @Valid List<ExceptionalPeriod> exceptional_openings;
-    @Valid List<ExceptionalPeriod> exceptional_closings;
+    List<@Valid RegularHours> regular_hours;
+    List<@Valid ExceptionalPeriod> exceptional_openings;
+    List<@Valid ExceptionalPeriod> exceptional_closings;
 }

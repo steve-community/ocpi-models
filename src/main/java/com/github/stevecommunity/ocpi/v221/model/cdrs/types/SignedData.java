@@ -14,6 +14,6 @@ public class SignedData {
     @NotEmpty @Size(max = 36) String encoding_method;
     Integer encoding_method_version;
     @Size(max = 512) String public_key;
-    @NotEmpty @Valid List<SignedValue> signed_values;
+    @NotEmpty List<@Valid SignedValue> signed_values;
     @Size(max = 512) String url;
 }

@@ -13,5 +13,5 @@ import java.util.List;
 @Data
 public class CommandResult {
     @NotNull CommandResultType result;
-    @Valid List<DisplayText> message;
+    List<@Valid DisplayText> message;
 }

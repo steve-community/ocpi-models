@@ -24,14 +24,14 @@ public class EvsePatch {
     @Size(max = 36) String uid;
     @Size(max = 48) String evse_id;
     Status status;
-    @Valid List<StatusSchedule> status_schedule;
+    List<@Valid StatusSchedule> status_schedule;
     List<Capability> capabilities;
-    @Valid List<Connector> connectors;
+    List<@Valid Connector> connectors;
     @Size(max = 4) String floor_level;
     @Valid GeoLocation coordinates;
     @Size(max = 16) String physical_reference;
-    @Valid List<DisplayText> directions;
+    List<@Valid DisplayText> directions;
     List<ParkingRestriction> parking_restrictions;
-    @Valid List<Image> images;
+    List<@Valid Image> images;
     @NotNull Instant last_updated;
 }

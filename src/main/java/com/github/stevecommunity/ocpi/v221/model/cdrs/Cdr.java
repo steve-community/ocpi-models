@@ -32,8 +32,8 @@ public class Cdr {
     @NotNull @Valid CdrLocation cdr_location;
     @Size(max = 255) String meter_id;
     @NotEmpty @Size(max = 3) String currency;
-    @Valid List<Tariff> tariffs;
-    @NotEmpty @Valid List<ChargingPeriod> charging_periods;
+    List<@Valid Tariff> tariffs;
+    @NotEmpty List<@Valid ChargingPeriod> charging_periods;
     @Valid SignedData signed_data;
     @NotNull @Valid Price total_cost;
     @Valid Price total_fixed_cost;

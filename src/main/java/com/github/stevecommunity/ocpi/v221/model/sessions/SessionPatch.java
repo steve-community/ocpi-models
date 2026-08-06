@@ -33,7 +33,7 @@ public class SessionPatch {
     @Size(max = 36) String connector_id;
     @Size(max = 255) String meter_id;
     @Size(max = 3) String currency;
-    @Valid List<ChargingPeriod> charging_periods;
+    List<@Valid ChargingPeriod> charging_periods;
     @Valid Price total_cost;
     SessionStatus status;
     @NotNull Instant last_updated;

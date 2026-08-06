@@ -14,5 +14,5 @@ import java.util.List;
 public class CommandResponse {
     @NotNull CommandResponseType result;
     @NotNull Integer timeout;
-    @Valid List<DisplayText> message;
+    List<@Valid DisplayText> message;
 }

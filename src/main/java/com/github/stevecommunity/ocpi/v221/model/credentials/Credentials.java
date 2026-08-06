@@ -14,5 +14,5 @@ import java.util.List;
 public class Credentials {
     @NotEmpty @Size(max = 64) String token;
     @NotEmpty @Size(max = 255) String url;
-    @NotEmpty @Valid List<CredentialsRole> roles;
+    @NotEmpty List<@Valid CredentialsRole> roles;
 }
