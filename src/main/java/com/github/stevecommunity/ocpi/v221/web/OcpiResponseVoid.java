@@ -1,6 +1,8 @@
 package com.github.stevecommunity.ocpi.v221.web;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.http.HttpStatus;
@@ -15,7 +17,20 @@ import java.time.Instant;
 public class OcpiResponseVoid implements OcpiResponseEnvelope {
     @NotNull StatusCode status_code;
     String status_message;
-    @NotNull final Instant timestamp = Instant.now();
+    @NotNull final Instant timestamp;
+
+    public OcpiResponseVoid() {
+        this(null, null, Instant.now());
+    }
+
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public OcpiResponseVoid(@JsonProperty("status_code") StatusCode statusCode,
+                            @JsonProperty("status_message") String statusMessage,
+                            @JsonProperty("timestamp") Instant timestamp) {
+        this.status_code = statusCode;
+        this.status_message = statusMessage;
+        this.timestamp = timestamp;
+    }
 
     public static OcpiResponseVoid from() {
         return new OcpiResponseVoid();

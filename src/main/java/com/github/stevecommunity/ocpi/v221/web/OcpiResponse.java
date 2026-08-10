@@ -1,6 +1,8 @@
 package com.github.stevecommunity.ocpi.v221.web;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.http.HttpStatus;
@@ -17,7 +19,22 @@ public class OcpiResponse<T> implements OcpiResponseEnvelope {
     @Valid final T data;
     @NotNull StatusCode status_code;
     String status_message;
-    @NotNull final Instant timestamp = Instant.now();
+    @NotNull final Instant timestamp;
+
+    public OcpiResponse(T data) {
+        this(data, null, null, Instant.now());
+    }
+
+    @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
+    public OcpiResponse(@JsonProperty("data") T data,
+                        @JsonProperty("status_code") StatusCode statusCode,
+                        @JsonProperty("status_message") String statusMessage,
+                        @JsonProperty("timestamp") Instant timestamp) {
+        this.data = data;
+        this.status_code = statusCode;
+        this.status_message = statusMessage;
+        this.timestamp = timestamp;
+    }
 
     public static <T> OcpiResponse<T> from(T data) {
         return new OcpiResponse<>(data);
