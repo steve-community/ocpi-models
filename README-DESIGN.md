@@ -56,9 +56,11 @@ public class Tariff {
     @JsonProperty("elements")
     private List<TariffElement> elements;
 
+    @OcpiDateTime
     @JsonProperty("start_date_time")
     private Instant startDateTime;
 
+    @OcpiDateTime
     @JsonProperty("end_date_time")
     private Instant endDateTime;
 
@@ -67,6 +69,7 @@ public class Tariff {
     private EnergyMix energyMix;
 
     @NotNull
+    @OcpiDateTime
     @JsonProperty("last_updated")
     private Instant lastUpdated;
 }
@@ -128,8 +131,8 @@ public class OcpiRequestParameters {
     public static final int DEFAULT_LIMIT = 50;
     public static final int MAX_LIMIT = 200;
     
-    Instant date_from;
-    Instant date_to;
+    @OcpiDateTime Instant date_from;
+    @OcpiDateTime Instant date_to;
     @Min(value = 0) Integer offset = 0;
     @Min(value = 0) Integer limit = DEFAULT_LIMIT;
 }
@@ -213,7 +216,7 @@ public class LocationPatch extends AbstractLocation {
     Boolean charging_when_closed;
     @Valid List<Image> images;
     @Valid EnergyMix energy_mix;
-    @NotNull Instant last_updated;
+    @OcpiDateTime @NotNull Instant last_updated;
 }
 ```
 

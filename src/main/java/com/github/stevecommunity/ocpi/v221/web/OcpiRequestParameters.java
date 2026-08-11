@@ -1,5 +1,6 @@
 package com.github.stevecommunity.ocpi.v221.web;
 
+import com.github.stevecommunity.ocpi.v221.util.OcpiDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,8 +16,8 @@ public class OcpiRequestParameters {
     public static final int DEFAULT_LIMIT = 50;
     public static final int MAX_LIMIT = 200;
 
-    Instant date_from;
-    Instant date_to;
+    @OcpiDateTime Instant date_from;
+    @OcpiDateTime Instant date_to;
     @Min(value = 0) Integer offset = 0;
     @Min(value = 0) Integer limit = DEFAULT_LIMIT;
 

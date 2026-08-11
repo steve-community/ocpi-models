@@ -1,5 +1,6 @@
 package com.github.stevecommunity.ocpi.v221.model.hubclientinfo;
 
+import com.github.stevecommunity.ocpi.v221.util.OcpiDateTime;
 import com.github.stevecommunity.ocpi.v221.model.Role;
 import com.github.stevecommunity.ocpi.v221.model.hubclientinfo.types.ConnectionStatus;
 import lombok.Data;
@@ -17,5 +18,5 @@ public class ClientInfo {
     @NotEmpty @Size(max = 2) String country_code;
     @NotNull Role role;
     @NotNull ConnectionStatus status;
-    @NotNull Instant last_updated;
+    @OcpiDateTime @NotNull Instant last_updated;
 }

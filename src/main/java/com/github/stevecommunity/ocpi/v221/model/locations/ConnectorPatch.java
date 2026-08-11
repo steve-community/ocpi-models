@@ -1,6 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.model.locations;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.github.stevecommunity.ocpi.v221.util.OcpiDateTime;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.ConnectorFormat;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.ConnectorType;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.PowerType;
@@ -25,5 +26,5 @@ public class ConnectorPatch {
     Integer max_electric_power;
     List<@Size(max = 36) String> tariff_ids;
     @Size(max = 255) String terms_and_conditions;
-    @NotNull Instant last_updated;
+    @OcpiDateTime @NotNull Instant last_updated;
 }

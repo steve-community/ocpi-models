@@ -1,6 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.model.sessions;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.github.stevecommunity.ocpi.v221.util.OcpiDateTime;
 import com.github.stevecommunity.ocpi.v221.model.Price;
 import com.github.stevecommunity.ocpi.v221.model.cdrs.types.AuthMethod;
 import com.github.stevecommunity.ocpi.v221.model.cdrs.types.CdrToken;
@@ -22,8 +23,8 @@ public class SessionPatch {
     @Size(max = 2) String country_code;
     @Size(max = 3) String party_id;
     @Size(max = 36) String id;
-    Instant start_date_time;
-    Instant end_date_time;
+    @OcpiDateTime Instant start_date_time;
+    @OcpiDateTime Instant end_date_time;
     Double kwh;
     @Valid CdrToken cdr_token;
     AuthMethod auth_method;
@@ -36,5 +37,5 @@ public class SessionPatch {
     List<@Valid ChargingPeriod> charging_periods;
     @Valid Price total_cost;
     SessionStatus status;
-    @NotNull Instant last_updated;
+    @OcpiDateTime @NotNull Instant last_updated;
 }

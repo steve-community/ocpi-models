@@ -2,6 +2,7 @@ package com.github.stevecommunity.ocpi.v221.model.locations;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.github.stevecommunity.ocpi.v221.model.DisplayText;
+import com.github.stevecommunity.ocpi.v221.util.OcpiDateTime;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.Capability;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.GeoLocation;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.Image;
@@ -33,5 +34,5 @@ public class EvsePatch {
     List<@Valid DisplayText> directions;
     List<ParkingRestriction> parking_restrictions;
     List<@Valid Image> images;
-    @NotNull Instant last_updated;
+    @OcpiDateTime @NotNull Instant last_updated;
 }

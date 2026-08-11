@@ -1,6 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.model.cdrs;
 
 import com.github.stevecommunity.ocpi.v221.model.Price;
+import com.github.stevecommunity.ocpi.v221.util.OcpiDateTime;
 import com.github.stevecommunity.ocpi.v221.model.cdrs.types.AuthMethod;
 import com.github.stevecommunity.ocpi.v221.model.cdrs.types.CdrLocation;
 import com.github.stevecommunity.ocpi.v221.model.cdrs.types.CdrToken;
@@ -23,8 +24,8 @@ public class Cdr {
     @NotEmpty @Size(max = 2) String country_code;
     @NotEmpty @Size(max = 3) String party_id;
     @NotEmpty @Size(max = 39) String id;
-    @NotNull Instant start_date_time;
-    @NotNull Instant end_date_time;
+    @OcpiDateTime @NotNull Instant start_date_time;
+    @OcpiDateTime @NotNull Instant end_date_time;
     @Size(max = 36) String session_id;
     @NotNull @Valid CdrToken cdr_token;
     @NotNull AuthMethod auth_method;
@@ -49,5 +50,5 @@ public class Cdr {
     Boolean credit;
     @Size(max = 39) String credit_reference_id;
     Boolean home_charging_compensation;
-    @NotNull Instant last_updated;
+    @OcpiDateTime @NotNull Instant last_updated;
 }

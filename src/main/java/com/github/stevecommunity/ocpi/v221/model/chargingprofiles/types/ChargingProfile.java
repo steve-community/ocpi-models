@@ -1,5 +1,6 @@
 package com.github.stevecommunity.ocpi.v221.model.chargingprofiles.types;
 
+import com.github.stevecommunity.ocpi.v221.util.OcpiDateTime;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Accessors(chain = true)
 @Data
 public class ChargingProfile {
-    Instant start_date_time;
+    @OcpiDateTime Instant start_date_time;
     Integer duration;
     @NotNull ChargingRateUnit charging_rate_unit;
     Double min_charging_rate;
