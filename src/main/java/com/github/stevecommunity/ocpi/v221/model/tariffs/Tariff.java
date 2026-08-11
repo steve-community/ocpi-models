@@ -1,6 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.model.tariffs;
 
 import com.github.stevecommunity.ocpi.v221.model.DisplayText;
+import com.github.stevecommunity.ocpi.v221.util.OcpiDateTime;
 import com.github.stevecommunity.ocpi.v221.model.Price;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.EnergyMix;
 import com.github.stevecommunity.ocpi.v221.model.tariffs.types.TariffElement;
@@ -28,8 +29,8 @@ public class Tariff {
     @Valid Price min_price;
     @Valid Price max_price;
     @NotEmpty List<@Valid TariffElement> elements;
-    Instant start_date_time;
-    Instant end_date_time;
+    @OcpiDateTime Instant start_date_time;
+    @OcpiDateTime Instant end_date_time;
     @Valid EnergyMix energy_mix;
-    @NotNull Instant last_updated;
+    @OcpiDateTime @NotNull Instant last_updated;
 }

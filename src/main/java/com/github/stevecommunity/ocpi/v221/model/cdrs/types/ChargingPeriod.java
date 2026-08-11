@@ -1,5 +1,6 @@
 package com.github.stevecommunity.ocpi.v221.model.cdrs.types;
 
+import com.github.stevecommunity.ocpi.v221.util.OcpiDateTime;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @Accessors(chain = true)
 @Data
 public class ChargingPeriod {
-    @NotNull Instant start_date_time;
+    @OcpiDateTime @NotNull Instant start_date_time;
     @NotEmpty List<@Valid CdrDimension> dimensions;
     @Size(max = 36) String tariff_id;
 }

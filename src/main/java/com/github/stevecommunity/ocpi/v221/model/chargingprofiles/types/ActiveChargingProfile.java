@@ -1,5 +1,6 @@
 package com.github.stevecommunity.ocpi.v221.model.chargingprofiles.types;
 
+import com.github.stevecommunity.ocpi.v221.util.OcpiDateTime;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -10,6 +11,6 @@ import java.time.Instant;
 @Accessors(chain = true)
 @Data
 public class ActiveChargingProfile {
-    @NotNull Instant start_date_time;
+    @OcpiDateTime @NotNull Instant start_date_time;
     @NotNull @Valid ChargingProfile charging_profile;
 }

@@ -3,6 +3,7 @@ package com.github.stevecommunity.ocpi.v221.model.locations;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.github.stevecommunity.ocpi.v221.model.AbstractLocation;
 import com.github.stevecommunity.ocpi.v221.model.DisplayText;
+import com.github.stevecommunity.ocpi.v221.util.OcpiDateTime;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.AdditionalGeoLocation;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.BusinessDetails;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.EnergyMix;
@@ -45,5 +46,5 @@ public class LocationPatch extends AbstractLocation {
     Boolean charging_when_closed;
     List<@Valid Image> images;
     @Valid EnergyMix energy_mix;
-    @NotNull Instant last_updated;
+    @OcpiDateTime @NotNull Instant last_updated;
 }

@@ -1,6 +1,7 @@
 package com.github.stevecommunity.ocpi.v221.model.tokens;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.github.stevecommunity.ocpi.v221.util.OcpiDateTime;
 import com.github.stevecommunity.ocpi.v221.model.locations.types.PublishTokenType;
 import com.github.stevecommunity.ocpi.v221.model.sessions.types.ProfileType;
 import com.github.stevecommunity.ocpi.v221.model.tokens.types.EnergyContract;
@@ -30,5 +31,5 @@ public class TokenPatch extends PublishTokenType {
     @Size(max = 2) String language;
     ProfileType default_profile_type;
     @Valid EnergyContract energy_contract;
-    @NotNull Instant last_updated;
+    @OcpiDateTime @NotNull Instant last_updated;
 }

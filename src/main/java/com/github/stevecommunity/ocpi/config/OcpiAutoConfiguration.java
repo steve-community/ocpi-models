@@ -1,5 +1,6 @@
 package com.github.stevecommunity.ocpi.config;
 
+import com.github.stevecommunity.ocpi.v221.util.OcpiDateTimeFormatter;
 import com.github.stevecommunity.ocpi.v221.web.VersionNumberConverter;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -15,6 +16,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -63,6 +65,11 @@ public class OcpiAutoConfiguration {
             @Override
             public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
                 resolvers.add(resolver);
+            }
+
+            @Override
+            public void addFormatters(FormatterRegistry registry) {
+                registry.addFormatterForFieldAnnotation(new OcpiDateTimeFormatter.SpringMvc());
             }
         };
     }

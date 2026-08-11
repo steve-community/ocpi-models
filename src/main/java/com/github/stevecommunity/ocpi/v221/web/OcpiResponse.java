@@ -3,6 +3,7 @@ package com.github.stevecommunity.ocpi.v221.web;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.stevecommunity.ocpi.v221.util.OcpiDateTime;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class OcpiResponse<T> implements OcpiResponseEnvelope {
     @Valid final T data;
     @NotNull StatusCode status_code;
     String status_message;
-    @NotNull final Instant timestamp;
+    @OcpiDateTime @NotNull final Instant timestamp;
 
     public OcpiResponse(T data) {
         this(data, null, null, Instant.now());
@@ -29,7 +30,7 @@ public class OcpiResponse<T> implements OcpiResponseEnvelope {
     public OcpiResponse(@JsonProperty("data") T data,
                         @JsonProperty("status_code") StatusCode statusCode,
                         @JsonProperty("status_message") String statusMessage,
-                        @JsonProperty("timestamp") Instant timestamp) {
+                        @JsonProperty("timestamp") @OcpiDateTime Instant timestamp) {
         this.data = data;
         this.status_code = statusCode;
         this.status_message = statusMessage;
