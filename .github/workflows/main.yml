@@ -2,6 +2,10 @@ name: Java CI
 
 on: [push]
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,3 +22,17 @@ jobs:
 
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify
+
+      - name: Configure Git User
+        if: github.ref_name == 'main'
+        run: |
+            git config user.email "actions@github.com"
+            git config user.name "GitHub Actions"
+
+      - name: Create release, if build is on main branch
+        if: github.ref_name == 'main'
+        run: |
+            mvn --batch-mode -DpreparationGoals=clean release:prepare
+            mvn --batch-mode -DlocalCheckout=true -Darguments="-Dmaven.test.skip=true" release:perform
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
