@@ -4,7 +4,7 @@
 
     <groupId>com.github.steve-community</groupId>
     <artifactId>ocpi-models</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -19,7 +19,7 @@
         <connection>scm:git:https://github.com/steve-community/ocpi-models.git</connection>
         <developerConnection>scm:git:https://github.com/steve-community/ocpi-models.git</developerConnection>
         <url>https://github.com/steve-community/ocpi-models</url>
-        <tag>HEAD</tag>
+        <tag>0.0.3</tag>
     </scm>
 
     <distributionManagement>
