@@ -96,7 +96,7 @@ See [GitHub's Maven registry documentation](https://docs.github.com/en/packages/
 ## Module Coverage
 
 The following OCPI 2.2.1 models, Spring MVC interfaces, and client methods are present in this repository.
-“Available” describes library building blocks, not a running module implementation or a claim of protocol certification.
+A checkmark describes availability of building blocks, not a running module implementation.
 
 | Module / discovery API | Models | Sender API | Receiver API | Client methods |
 | --- | --- | --- | --- | --- |
