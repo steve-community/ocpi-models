@@ -84,13 +84,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>7.0.7</version>
+            <version>7.0.10</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-common</artifactId>
-            <version>3.1.1</version>
+            <version>3.2.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
